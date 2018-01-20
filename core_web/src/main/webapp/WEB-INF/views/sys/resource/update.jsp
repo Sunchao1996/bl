@@ -358,7 +358,7 @@
 
         $.ajax({
             type:"get",
-            url:"${dynamicServer}/sys/spring/initTree.htm",
+            url:"${dynamicServer}/sys/resource/initTree.htm",
             data:{"resourceLevel":resourceLevel},
             dataType:"json",
             contentType: 'application/json',
