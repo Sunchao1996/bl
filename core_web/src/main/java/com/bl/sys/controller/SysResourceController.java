@@ -3,10 +3,10 @@ package com.bl.sys.controller;
 import com.bl.core.pub.PubConfig;
 import com.bl.sys.model.SysResource;
 import com.bl.sys.service.SysResourceService;
-import com.bl.book.util.code.GlobalCode;
-import com.bl.book.util.string.BackUrlUtil;
-import com.bl.book.util.string.StringUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.code.GlobalCode;
+import com.bl.util.string.BackUrlUtil;
+import com.bl.util.string.StringUtil;
+import com.bl.util.web.WebUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +49,7 @@ public class SysResourceController  {
         List<SysResource> list = sysResourceService.list();
         // 把获取的记录放到mv里面
         mv.addObject("list", list);
-        String url = pubConfig.getDynamicServer() + "/sys/spring/index.htm?";
+        String url = pubConfig.getDynamicServer() + "/sys/resource/index.htm?";
         mv.addObject("backUrl", StringUtil.encodeUrl(url));
         return mv;
     }
@@ -299,7 +299,7 @@ public class SysResourceController  {
         //取得父节点放入mv
         mv.addObject("resource", sysResourceService.get(parentId));
         mv.addObject("resourceName", resourceName);
-        String url = pubConfig.getDynamicServer() + "/sys/spring/functionIndex.htm?parentId=" + parentId;
+        String url = pubConfig.getDynamicServer() + "/sys/resource/functionIndex.htm?parentId=" + parentId;
         mv.addObject("backUrl", StringUtil.encodeUrl(url));
         return mv;
     }

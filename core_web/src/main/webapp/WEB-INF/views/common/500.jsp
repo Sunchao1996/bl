@@ -5,10 +5,10 @@
     // 本页面是在客户查找的页面无法找到的情况下调用的
     response.setStatus(HttpServletResponse.SC_OK);
 %>
-<critc-css>
+<bl-css>
     <link href="${staticServer}/assets/metronic4.7/pages/css/error.min.css"
           rel="stylesheet" type="text/css" />
-</critc-css>
+</bl-css>
 <head>
     <title>500错误</title>
 </head>

@@ -99,7 +99,7 @@
 	</div>
 
 </body>
-<critc-script>
+<bl-script>
 <script
 	src="${staticServer}/assets/example/autocomplete/js/jquery.autocomplete.js"></script>
 	 <script type="text/javascript">
@@ -168,4 +168,4 @@
             }  
           });  
         }  
-    </script> </critc-script>
+    </script> </bl-script>

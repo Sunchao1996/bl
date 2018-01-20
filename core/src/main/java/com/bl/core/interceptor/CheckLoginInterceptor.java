@@ -5,11 +5,11 @@
  */
 package com.bl.core.interceptor;
 
-import com.bl.book.util.json.JsonUtil;
-import com.bl.book.util.session.SessionUtil;
-import com.bl.book.util.session.UserSession;
-import com.bl.book.util.string.StringUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.json.JsonUtil;
+import com.bl.util.session.SessionUtil;
+import com.bl.util.session.UserSession;
+import com.bl.util.string.StringUtil;
+import com.bl.util.web.WebUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 

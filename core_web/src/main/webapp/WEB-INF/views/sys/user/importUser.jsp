@@ -81,7 +81,7 @@
 	</div>
 
 </body>
-<critc-script> <script type="text/javascript">
+<bl-script> <script type="text/javascript">
 	var waring = "";
 	var sumData = "";
 	var listJson = "";
@@ -251,4 +251,4 @@
 		}
 		return url;
 	}
-</script> </critc-script>
+</script> </bl-script>

@@ -1,7 +1,7 @@
 package com.bl.sys.model;
 
-import com.bl.book.util.model.BaseModel;
-import com.bl.book.util.string.RegexUtil;
+import com.bl.util.model.BaseModel;
+import com.bl.util.string.RegexUtil;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;

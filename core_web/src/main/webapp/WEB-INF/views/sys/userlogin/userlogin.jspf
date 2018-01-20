@@ -32,7 +32,7 @@
     </div>
 </div>
 </body>
-<critc-script>
+<bl-script>
 <script>
 //登录记录
 var viewLoginHis = function (id, title) {
@@ -130,4 +130,4 @@ $(function () {
     }).api();
     //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
 });
-</script></critc-script>
+</script></bl-script>

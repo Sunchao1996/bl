@@ -4,10 +4,10 @@
 <head>
     <title>用户管理</title>
 </head>
-<critc-css>
+<bl-css>
     <link href="${staticServer }/assets/zTree3.5/css/zTreeStyle/metro.css" rel="stylesheet" type="text/css"/>
 
-</critc-css>
+</bl-css>
 <body>
 
 <div class="page-bar">
@@ -70,7 +70,7 @@
                 <button class="btn btn-primary" id="btnSearch">
                     <i class="ace-icon fa fa-search"></i> 查询
                 </button>
-                <c:if test="${critc:isP('SysUserAdd')}">
+                <c:if test="${bl:isP('SysUserAdd')}">
                     <button type="button" class="btn btn-success" id="btnAdd">
                         <i class="ace-icon fa fa-plus bigger-100"></i>新增
                     </button>
@@ -122,23 +122,23 @@
                     </td>
                     <td>${sysUser.roleName }</td>
                     <td>${sysUser.mobile }</td>
-                    <td>${critc:getUserStatus(sysUser.status)}</td>
+                    <td>${bl:getUserStatus(sysUser.status)}</td>
                     <td>
                         <a href="detail.htm?id=${sysUser.id }&backUrl=${backUrl}&pageType=1">查看 </a>
                     </td>
-                    <td><c:if test="${critc:isP('SysUserUpdate')}">
+                    <td><c:if test="${bl:isP('SysUserUpdate')}">
                         <a href="toUpdate.htm?id=${sysUser.id }&backUrl=${backUrl}&pageType=0"> 修改 </a>
                     </c:if>
-                        <c:if test="${critc:isP('SysUserDelete')}">
+                        <c:if test="${bl:isP('SysUserDelete')}">
                             <a href="javascript:delUser(${sysUser.id });"> 删除 </a>
                         </c:if>
-                        <c:if test="${critc:isP('SysUserLock')&&sysUser.status==1}">
+                        <c:if test="${bl:isP('SysUserLock')&&sysUser.status==1}">
                             <a href="javascript:lock(${sysUser.id });">锁定 </a>
                         </c:if>
-                        <c:if test="${critc:isP('SysUserUnlock')&&sysUser.status==2}">
+                        <c:if test="${bl:isP('SysUserUnlock')&&sysUser.status==2}">
                             <a href="javascript:unlock(${sysUser.id });">解锁 </a>
                         </c:if>
-                        <c:if test="${critc:isP('SysUserResetPass')}">
+                        <c:if test="${bl:isP('SysUserResetPass')}">
                             <a href="javascript:resetPass(${sysUser.id });">重置密码 </a>
                         </c:if></td>
                 </tr>
@@ -153,7 +153,7 @@
 
 
 </body>
-<critc-script>
+<bl-script>
 
     <script src="${staticServer }/assets/zTree3.5/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
     <script type="text/javascript">
@@ -274,4 +274,4 @@
         }
 
     </script>
-</critc-script>
+</bl-script>

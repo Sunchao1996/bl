@@ -4,9 +4,9 @@
 
 <head>
     <title>字典管理</title>
-    <critc-css>
+    <bl-css>
         <link href="${staticServer }/assets/zTree3.5/css/zTreeStyle/metro.css" rel="stylesheet" type="text/css"/>
-    </critc-css>
+    </bl-css>
     
 </head>
 
@@ -149,7 +149,7 @@
 
 </body>
 
-<critc-script>
+<bl-script>
     <script type="text/javascript">
         var count = 2;
         var array = new Array();
@@ -352,4 +352,4 @@
     </script>
     
     
-</critc-script>
+</bl-script>

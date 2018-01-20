@@ -22,10 +22,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.baidu.ueditor.ActionEnter;
 import com.bl.core.pub.PubConfig;
-import com.bl.book.util.file.FileUploadUtil;
-import com.bl.book.util.json.JsonUtil;
-import com.bl.book.util.string.StringUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.file.FileUploadUtil;
+import com.bl.util.json.JsonUtil;
+import com.bl.util.string.StringUtil;
+import com.bl.util.web.WebUtil;
 
 /**
  * 

@@ -20,12 +20,12 @@ import com.bl.sys.model.SysUser;
 import com.bl.sys.model.SysUserLogin;
 import com.bl.sys.service.SysLoginService;
 import com.bl.sys.service.SysUserService;
-import com.bl.book.util.image.VerifyCodeUtil;
-import com.bl.book.util.json.JsonUtil;
-import com.bl.book.util.session.SessionUtil;
-import com.bl.book.util.session.UserSession;
-import com.bl.book.util.string.StringUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.image.VerifyCodeUtil;
+import com.bl.util.json.JsonUtil;
+import com.bl.util.session.SessionUtil;
+import com.bl.util.session.UserSession;
+import com.bl.util.string.StringUtil;
+import com.bl.util.web.WebUtil;
 
 /**
  * what:    系统登录校验，及首页显示

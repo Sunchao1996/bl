@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 import com.bl.sys.dao.SysDicDao;
 import com.bl.sys.model.SysDic;
 import com.bl.sys.vo.SysDicVO;
-import com.bl.book.util.model.ComboboxVO;
-import com.bl.book.util.string.StringUtil;
+import com.bl.util.model.ComboboxVO;
+import com.bl.util.string.StringUtil;
 
 /**
  * 

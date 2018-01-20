@@ -19,7 +19,7 @@
 	<%@ include file="../common/styles.jspf"%>
 </c:if>
 <sitemesh:write property='head' />
-<sitemesh:write property='critc-css' />
+<sitemesh:write property='bl-css' />
 <link rel="shortcut icon" href="${staticServer}/assets/common/images/favicon.ico" />
 </head>
 </head>
@@ -47,7 +47,7 @@
 			<%--<%@ include file="../common/footer.jspf" %>--%>
 		</div>
 		<%@include file="../common/scripts-3.jspf"%>
-		<sitemesh:write property='critc-script' />
+		<sitemesh:write property='bl-script' />
 		<script>
 			$(".page-bar > ul").addClass("breadcrumb");
 		</script>
@@ -77,7 +77,7 @@
 			<%--<%@ include file="../common/footer.jspf" %>--%>
 		</div>
 		<%@include file="../common/scripts.jspf"%>
-		<sitemesh:write property='critc-script' />
+		<sitemesh:write property='bl-script' />
 		<script>
 			$(".page-bar > ul").removeClass("breadcrumb");
 		</script>

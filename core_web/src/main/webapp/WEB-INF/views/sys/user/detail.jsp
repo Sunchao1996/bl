@@ -4,13 +4,13 @@
 <head>
     <title>用户管理</title>
 </head>
-<critc-css>
+<bl-css>
     <link rel="stylesheet"
           href="${staticServer}/assets/cropper3.0/cropper.min.css"/>
     <link rel="stylesheet" href="${staticServer}/assets/cropper3.0/main.css"/>
     <link href="${staticServer}/assets/metronic4.7/pages/css/profile.min.css" rel="stylesheet" type="text/css"/>
     <link href="${staticServer }/assets/zTree3.5/css/zTreeStyle/metro.css" rel="stylesheet" type="text/css"/>
-</critc-css>
+</bl-css>
 <body class="no-skin">
 
 <div class="page-bar">
@@ -353,7 +353,7 @@
 
 </body>
 
-<critc-script>
+<bl-script>
     <script
             src="${staticServer}/assets/cropper3.0/cropper.min.js"></script>
     <script
@@ -578,4 +578,4 @@ init();
         });
 
     </script>
-</critc-script>
+</bl-script>

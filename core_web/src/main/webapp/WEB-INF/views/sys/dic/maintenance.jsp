@@ -79,12 +79,12 @@
 														<td>${sysDic.name }</td>
 														<td>${sysDic.displayOrder }</td>
 														<td>
-														     <c:if test="${critc:isP('SysDicUpdate')}">
+														     <c:if test="${bl:isP('SysDicUpdate')}">
 												                 <a class="edit" href="#"> 修改 </a>
 											                 </c:if> 
 											             </td>
 											             <td>
-											                 <c:if test="${critc:isP('SysDicDelete')}">
+											                 <c:if test="${bl:isP('SysDicDelete')}">
 												                 <a class="delete" href="#"> 删除 </a>
 											                </c:if>
 											             </td>
@@ -116,7 +116,7 @@
    
     </form>
  </div>
- <critc-script>
+ <bl-script>
  <script type="text/javascript"> 
      var checkSysDic = null; 
      var delArray = new Array();   //要删除的sysDic的id
@@ -520,5 +520,5 @@
         }
      }
  </script>
-</critc-script>
+</bl-script>
 </body>

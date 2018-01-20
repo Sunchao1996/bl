@@ -4,10 +4,10 @@
 <head>
 
 </head>
-<critc-css>
+<bl-css>
     <link rel="stylesheet" href="${staticServer}/assets/cropper3.0/cropper.min.css"/>
     <link rel="stylesheet" href="${staticServer}/assets/cropper3.0/main.css"/>
-</critc-css>
+</bl-css>
 <body>
 <div class="container" id="crop-avatar">
     <!-- Cropping modal -->
@@ -106,7 +106,7 @@
 <!-- jQuery -->
 </body>
 
-<critc-script>
+<bl-script>
     <script src="${staticServer}/assets/cropper3.0/cropper.min.js"></script>
     <script src="${staticServer}/assets/cropper3.0/main.js"></script>
     <script>
@@ -138,6 +138,6 @@
 
         }
     </script>
-</critc-script>
+</bl-script>
 
 </html>

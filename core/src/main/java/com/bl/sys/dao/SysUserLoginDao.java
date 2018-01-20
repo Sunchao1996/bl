@@ -9,8 +9,8 @@ package com.bl.sys.dao;
 import com.bl.sys.vo.SysUserLoginSearchVO;
 import com.bl.core.dao.BaseDao;
 import com.bl.sys.model.SysUserLogin;
-import com.bl.book.util.page.PageUtil;
-import com.bl.book.util.string.StringUtil;
+import com.bl.util.page.PageUtil;
+import com.bl.util.string.StringUtil;
 
 import org.springframework.stereotype.Repository;
 import java.util.List;

@@ -2,9 +2,9 @@
 <%@ include file="../../common/taglib.jsp"%>
 <head>
 <title>主题切换</title>
-<critc-css>
+<bl-css>
 <link href="${staticServer}/assets/treetable/treeTable.min.css?version=${versionNo}" rel="stylesheet" type="text/css" />
-<!-- BEGIN THEME LAYOUT STYLES --> </critc-css>
+<!-- BEGIN THEME LAYOUT STYLES --> </bl-css>
 </head>
 
 <body>
@@ -156,7 +156,7 @@
 		</div>
 	</c:if>
 </body>
-<critc-script> <!-- BEGIN THEME LAYOUT SCRIPTS --> <!-- END THEME LAYOUT SCRIPTS --> </script> <script>
+<bl-script> <!-- BEGIN THEME LAYOUT SCRIPTS --> <!-- END THEME LAYOUT SCRIPTS --> </script> <script>
 	//Handle Theme Settings
 	var handleTheme = function() {
 
@@ -391,4 +391,4 @@
 			window.location.href = "${dynamicServer}/themeOfVertical.htm";
 		});
 	});
-</script></critc-script>
+</script></bl-script>

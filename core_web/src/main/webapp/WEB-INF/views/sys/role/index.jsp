@@ -40,7 +40,7 @@
                     	<button class="btn btn-primary" id="btnSearch">
 								<i class="ace-icon fa fa-search"></i> 查询
                        </button>
-                        <c:if test="${critc:isP('SysRoleAdd')}">
+                        <c:if test="${bl:isP('SysRoleAdd')}">
                             <button type="button" class="btn btn-success" id="btnAdd">
                                 <i class=" fa fa-plus bigger-110"></i> 新增
                             </button>
@@ -76,9 +76,9 @@
                     <td>${sysRole.description }</td>
                     <td>${sysRole.lastModifiedBy }</td>
                     <th width=120><fmt:formatDate value="${sysRole.lastModifiedAt}" pattern="yyyy-MM-dd HH:mm"/></th>
-                    <td><c:if test="${critc:isP('SysRoleUpdate')}">
+                    <td><c:if test="${bl:isP('SysRoleUpdate')}">
                         <a href="toUpdate.htm?id=${sysRole.id }&backUrl=${backUrl}"> 修改 </a>
-                    </c:if> <c:if test="${sysRole.isDelete eq 1 && critc:isP('SysRoleDelete')}">
+                    </c:if> <c:if test="${sysRole.isDelete eq 1 && bl:isP('SysRoleDelete')}">
                         <a href="javascript:delRole(${sysRole.id });"> 删除 </a>
                     </c:if></td>
                 </tr>
@@ -92,7 +92,7 @@
 </div>
 
 </body>
-<critc-script>
+<bl-script>
     <script type="text/javascript">
         $(function () {
             $("#btnSearch").bind('click', searchRole);
@@ -120,4 +120,4 @@
         }
 
     </script>
-</critc-script>
+</bl-script>

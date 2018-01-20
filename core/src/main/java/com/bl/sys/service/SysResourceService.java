@@ -2,7 +2,7 @@ package com.bl.sys.service;
 
 import com.bl.sys.dao.SysResourceDao;
 import com.bl.sys.model.SysResource;
-import com.bl.book.util.string.StringUtil;
+import com.bl.util.string.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

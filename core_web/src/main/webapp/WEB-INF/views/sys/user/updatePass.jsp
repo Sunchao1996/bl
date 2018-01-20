@@ -115,7 +115,7 @@
 </div>
 </body>
 
-<critc-script>
+<bl-script>
     <script type="text/javascript">
         $(function () {
             var validate = $("#userForm").validate({
@@ -178,5 +178,5 @@
 
     </script>
 
-</critc-script>
+</bl-script>
 </html>

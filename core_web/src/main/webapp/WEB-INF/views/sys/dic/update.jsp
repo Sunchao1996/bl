@@ -4,9 +4,9 @@
 
 <head>
     <title>字典管理</title>
-    <critc-css>
+    <bl-css>
         <link href="${staticServer }/assets/zTree3.5/css/zTreeStyle/metro.css" rel="stylesheet" type="text/css"/>
-    </critc-css>
+    </bl-css>
 </head>
 
 <body>
@@ -93,7 +93,7 @@
 </div>
 
 </body>
-<critc-script>
+<bl-script>
     <script type="text/javascript">
     
        
@@ -149,4 +149,4 @@
         });
 
     </script>
-</critc-script>
+</bl-script>

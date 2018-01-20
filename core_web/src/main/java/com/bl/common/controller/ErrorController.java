@@ -1,7 +1,7 @@
 package com.bl.common.controller;
 
-import com.bl.book.util.code.ReturnCodeUtil;
-import com.bl.book.util.string.StringUtil;
+import com.bl.util.code.ReturnCodeUtil;
+import com.bl.util.string.StringUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;

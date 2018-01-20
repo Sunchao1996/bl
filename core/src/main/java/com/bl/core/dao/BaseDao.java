@@ -5,7 +5,7 @@
  */
 package com.bl.core.dao;
 
-import com.bl.book.util.model.ComboboxVO;
+import com.bl.util.model.ComboboxVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;

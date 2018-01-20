@@ -21,10 +21,10 @@ import com.bl.sys.model.SysResource;
 import com.bl.sys.model.SysRole;
 import com.bl.sys.model.SysRoleResource;
 import com.bl.sys.vo.SysRoleSearchVO;
-import com.bl.book.util.model.ComboboxVO;
-import com.bl.book.util.session.SessionUtil;
-import com.bl.book.util.session.UserSession;
-import com.bl.book.util.string.StringUtil;
+import com.bl.util.model.ComboboxVO;
+import com.bl.util.session.SessionUtil;
+import com.bl.util.session.UserSession;
+import com.bl.util.string.StringUtil;
 
 /**
  * what: 系统角色处理Service how: 系统的所有权限控制都在该类中处理，共有三个cache

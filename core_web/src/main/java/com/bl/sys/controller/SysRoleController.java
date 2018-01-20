@@ -17,12 +17,12 @@ import com.bl.sys.model.SysRole;
 import com.bl.sys.service.SysResourceService;
 import com.bl.sys.service.SysRoleService;
 import com.bl.sys.vo.SysRoleSearchVO;
-import com.bl.book.util.code.GlobalCode;
-import com.bl.book.util.page.PageNavigate;
-import com.bl.book.util.session.SessionUtil;
-import com.bl.book.util.string.BackUrlUtil;
-import com.bl.book.util.string.StringUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.code.GlobalCode;
+import com.bl.util.page.PageNavigate;
+import com.bl.util.session.SessionUtil;
+import com.bl.util.string.BackUrlUtil;
+import com.bl.util.string.StringUtil;
+import com.bl.util.web.WebUtil;
 
 /**
  * 

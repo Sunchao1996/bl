@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.bl.book.util.model.BaseModel;
+import com.bl.util.model.BaseModel;
 
 /**
  * 

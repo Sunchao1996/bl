@@ -23,9 +23,9 @@ import com.bl.core.pub.PubConfig;
 import com.bl.sys.model.SysDic;
 import com.bl.sys.service.SysDicService;
 import com.bl.sys.vo.SysDicVO;
-import com.bl.book.util.code.GlobalCode;
-import com.bl.book.util.string.BackUrlUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.code.GlobalCode;
+import com.bl.util.string.BackUrlUtil;
+import com.bl.util.web.WebUtil;
 
 /**
  * 

@@ -4,9 +4,9 @@
 
 <head>
     <title>资源管理</title>
-    <critc-css>
+    <bl-css>
         <link href="${staticServer }/assets/zTree3.5/css/zTreeStyle/metro.css" rel="stylesheet" type="text/css"/>
-    </critc-css>
+    </bl-css>
 </head>
 
 <body>
@@ -79,7 +79,7 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label">链接目标：</label>
                     <div class="col-md-9">
-                        ${critc:createCombo2('{_self:_self,_blank:_blank}',sysResource.target,0,'target','target','form-control input-inline input-xlarge' )}
+                        ${bl:createCombo2('{_self:_self,_blank:_blank}',sysResource.target,0,'target','target','form-control input-inline input-xlarge' )}
                     </div>
                 </div>
                 <div class="form-group">
@@ -153,7 +153,7 @@
 
 
 </body>
-<critc-script>
+<bl-script>
     <script src="${staticServer }/assets/zTree3.5/js/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
     <script type="text/javascript">
 
@@ -261,4 +261,4 @@
         });
 
     </script>
-</critc-script>
+</bl-script>

@@ -3,10 +3,10 @@
 
 <head>
     <title>角色管理</title>
-    <critc-css>
+    <bl-css>
         <link href="${staticServer}/assets/treetable/treeTable.min.css?version=${versionNo}" rel="stylesheet"
               type="text/css"/>
-    </critc-css>
+    </bl-css>
 </head>
 
 <body>
@@ -118,7 +118,7 @@
 
 </body>
 
-<critc-script>
+<bl-script>
 <script src="${staticServer }/assets/treetable/jquery.treeTable.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -241,4 +241,4 @@
             });
         });
     </script>
-</critc-script>
+</bl-script>

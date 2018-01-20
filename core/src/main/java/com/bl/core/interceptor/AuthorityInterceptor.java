@@ -6,15 +6,15 @@
 package com.bl.core.interceptor;
 
 import com.bl.sys.service.SysLogService;
-import com.bl.book.util.code.GlobalCode;
-import com.bl.book.util.session.SessionUtil;
+import com.bl.util.code.GlobalCode;
+import com.bl.util.session.SessionUtil;
 import com.bl.core.pub.PubConfig;
 import com.bl.sys.service.SysRoleService;
-import com.bl.book.util.date.DateUtil;
-import com.bl.book.util.json.JsonUtil;
-import com.bl.book.util.session.UserSession;
-import com.bl.book.util.string.StringUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.date.DateUtil;
+import com.bl.util.json.JsonUtil;
+import com.bl.util.session.UserSession;
+import com.bl.util.string.StringUtil;
+import com.bl.util.web.WebUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

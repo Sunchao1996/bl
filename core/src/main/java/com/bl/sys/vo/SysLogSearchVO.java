@@ -4,7 +4,7 @@
  */
 package com.bl.sys.vo;
 
-import com.bl.book.util.page.PageSearchVO;
+import com.bl.util.page.PageSearchVO;
 
 /**
  * 

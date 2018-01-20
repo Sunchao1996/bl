@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import com.bl.sys.vo.AvatarScale;
-import com.bl.book.util.image.ImageCutUtil;
-import com.bl.book.util.json.JsonUtil;
-import com.bl.book.util.web.WebUtil;
+import com.bl.util.image.ImageCutUtil;
+import com.bl.util.json.JsonUtil;
+import com.bl.util.web.WebUtil;
 
 /**
  * 

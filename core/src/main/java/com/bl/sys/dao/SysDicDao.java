@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.bl.core.dao.BaseDao;
 import com.bl.sys.model.SysDic;
-import com.bl.book.util.model.ComboboxVO;
+import com.bl.util.model.ComboboxVO;
 
 /**
  * 

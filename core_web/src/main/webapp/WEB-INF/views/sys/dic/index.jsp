@@ -2,10 +2,10 @@
 <%@ include file="../../common/taglib.jsp" %>
 <head>
     <title>字典管理</title>
-    <critc-css>
+    <bl-css>
         <link href="${staticServer}/assets/treetable/treeTable.min.css?version=${versionNo}" rel="stylesheet"
               type="text/css"/>
-    </critc-css>
+    </bl-css>
 </head>
 
 <body>
@@ -40,7 +40,7 @@
                         <button class="btn btn-primary" id="btnRefresh">
                             <i class="fa fa-search"></i> 刷新
                         </button>
-                        <c:if test="${critc:isP('SysDicToAddCategory')}">
+                        <c:if test="${bl:isP('SysDicToAddCategory')}">
                             <button type="button" class="btn btn-success" id="btnAddCategory">
                                 <i class=" fa fa-plus bigger-110"></i> 新增类别
                             </button>
@@ -69,9 +69,9 @@
 						<tr id="${sysDic.id}" pId="${sysDic.pid}">
 								<td >${sysDic.name }</td>
 								<td>${sysDic.code }</td>
-								<td><c:if test="${critc:isP('SysDicToUpdateCategory')}">
+								<td><c:if test="${bl:isP('SysDicToUpdateCategory')}">
 										<a href="toMaintenance.htm?category=${sysDic.code }&backUrl=${backUrl}"> 字典明细 </a>
-									</c:if> <c:if test="${critc:isP('SysDicDelete')}">
+									</c:if> <c:if test="${bl:isP('SysDicDelete')}">
 										<a href="javascript:delSysDic(${sysDic.id},'${sysDic.code}');"> 删除 </a>
 									</c:if></td>
 						</tr>
@@ -92,7 +92,7 @@
     <div class="col-md-12">${ pageNavigate.pageModel}</div>
 </div>
 </body>
-<critc-script>
+<bl-script>
     <script src="${staticServer }/assets/treetable/jquery.treeTable.min.js" type="text/javascript"></script>
 
     <script type="text/javascript">
@@ -164,4 +164,4 @@
             window.location = 'clearCache.htm?backUrl=${backUrl }';
         }
     </script>
-</critc-script>
+</bl-script>

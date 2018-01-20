@@ -37,7 +37,7 @@
                         <button class="btn btn-primary" id="btnSearch">
                             <i class="fa fa-search"></i> 刷新
                         </button>
-                        <c:if test="${critc:isP('SysResourceAdd')}">
+                        <c:if test="${bl:isP('SysResourceAdd')}">
                             <button type="button" class="btn green-meadow" id="btnAdd">
                                 <i class=" fa fa-plus bigger-110"></i> 新增
                             </button>
@@ -77,10 +77,10 @@
                     <td>${resource.code}</td>
                     <td>${resource.url}</td>
                     <td>${resource.displayOrder}</td>
-                    <td><c:if test="${critc:isP('SysResourceUpdate')}">
+                    <td><c:if test="${bl:isP('SysResourceUpdate')}">
                         <a href="toFunctionUpdate.htm?id=${spring.id}&backUrl=${backUrl}"> 修改</i>
                         </a>
-                    </c:if> <c:if test="${critc:isP('SysResourceDelete')}">
+                    </c:if> <c:if test="${bl:isP('SysResourceDelete')}">
                         <a href="javascript:delFunction(${resource.id });"> 删除 </a>
                     </c:if></td>
                 </tr>
@@ -92,7 +92,7 @@
 
 
 </body>
-<critc-script>
+<bl-script>
 
     <script type="text/javascript">
         $(function () {
@@ -118,4 +118,4 @@
             window.location = 'toFunctionAdd.htm?parentId=${resource.id}&backUrl=${backUrl }';
         }
     </script>
-</critc-script>
+</bl-script>
