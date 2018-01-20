@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bl.book.dao.BookDao">
+	<!-- 初始化书架 -->
+	<insert id="insertBookSeat">
+		insert into book_seat(bookSeat,seatStatus) values
+		<foreach collection="list" item="obj" separator="," >
+		 (#{obj.bookSeat},#{obj.seatStatus})
+		</foreach>
+	</insert>
+	
+	<!-- 添加单个图书类别 -->
+	<insert id="insertBookCategory">
+		insert into book_category values (#{bookCategoryId},#{bookCategory},0)
+	</insert>
+	
+	<!-- 通过文件添加多个图书类别 -->
+	<insert id="insertBookCategorys">
+		insert into book_category values
+		<foreach collection="list" item="obj" separator="," >
+		 (#{obj.bookCategoryId},#{obj.bookCategory},0)
+		</foreach>
+	</insert>
+	
+	<!-- 统计图书类别个数 -->
+	<select id="selectBookCategoryCount" resultType="int">
+		select count(*) from book_category
+	</select>
+	
+	<!-- 分页查询图书类别 -->
+	<select id="selectBookCategory" resultType="BookCategory">
+		select * from book_category limit #{startLine},#{pageSize}
+	</select>
+	
+	<!-- 查询所有图书类别 -->
+	<select id="queryBookCategoryAll" resultType="BookCategory">
+		select * from book_category
+	</select>
+	
+	<!-- 查询所有的图书类别 -->
+	<select id="selectBookCategorys" resultType="BookCategory">
+		select * from book_category
+	</select>
+	
+	<!-- 查询所有图书类别 -->
+	<select id="queryBookStatus" resultType="com.bl.book.beans.bo.BookStatus">
+		select * from book_status
+	</select>
+	<!-- 查询所有图书类别 -->
+	<select id="findBP" resultType="com.bl.book.beans.bo.BookPrimary">
+		select * from book_primary where bookBarCode = #{bookBarCode}
+	</select>
+	
+	<!-- 根据条件查询图书个数 -->
+	<sql id="bookwhere">
+		<where>
+			<if test="bookBarCode != null and bookBarCode !=''">
+				and bookBarCode = #{bookBarCode}
+			</if>
+			
+			<if test="bookTitle != null and bookTitle !=''">
+				and bookTitle like '%' #{bookTitle} '%'
+			</if>
+			<if test="bookAuthor != null and bookAuthor !=''">
+				and bookAuthor like '%' #{bookAuthor} '%'
+			</if>
+			<if test="bookPress != null and bookPress !=''">
+				and bookPress like '%' #{bookPress} '%'
+			</if>
+			<if test="bookCategoryId != null and bookCategoryId !=''">
+				and bookCategoryId = #{bookCategoryId}
+			</if>			
+			<if test="startTime != null">
+				and bookPublish >= #{startTime}
+			</if>			
+			<if test="endTime != null">
+				and #{endTime} >= bookPublish
+			</if>	
+		</where>
+	</sql>
+	
+	<select id="queryBookCount" resultType="int">
+		select ifnull(sum(bookCount),-1) from book_info
+		<include refid="bookwhere" />
+	</select>
+	<!-- 根据id查询图书基本信息 -->
+	<select id="findByIdBI" resultType="com.bl.book.beans.bo.BookInfo">
+		select * from book_info where bookBarCode = #{bookBarCode}
+		
+	</select>
+	<select id="queryCount" resultType="int">
+		select count(*) from book_info
+		<include refid="bookwhere" />
+	</select>
+	<!-- 分页查询 -->
+	<select id="getByPage" resultType="com.bl.book.beans.bo.BookInfo">
+		select * from book_info
+		<include refid="bookwhere" />
+		order by bookCount desc
+		limit #{startLine},#{pageSize}
+	</select>
+	
+	<!-- 根据图书类别查找出一个空余位置  -->
+	<select id="queryBookSeat" resultType="com.bl.book.beans.bo.BookSeat">
+		select * from book_seat where bookSeat like '%' #{bookCategory} '%' and seatStatus=0 limit 0,1
+	</select>
+	
+	<!-- 查询出所要添加的图书所属类别  -->
+	<select id="findByIdBC" resultType="com.bl.book.beans.bo.BookCategory">
+		select * from book_category where bookCategoryId = #{bookCategoryId}
+	</select>
+	
+	<!-- 更新所属类别的图书数量 -->
+	<update id="updateBCCount">
+		update book_category set categoryCount = #{categoryCount} where bookCategoryId = #{bookCategoryId}
+	</update>
+	
+	<!-- 添加图书  -->
+	<insert id="insertBook">
+		insert into book_info(bookBarCode,bookISBN,bookTitle,bookAuthor,bookPress,bookPublish,bookPrintCount,bookCategoryId,bookComment,bookCount,bookPrice)
+		values
+		(
+		#{bookBarCode},
+		#{bookISBN},
+		#{bookTitle},
+		#{bookAuthor},
+		#{bookPress},
+		#{bookPublish},
+		#{bookPrintCount},
+		#{bookCategoryId},
+		#{bookComment},
+		#{bookCount},
+		#{bookPrice}
+		)		
+	</insert>
+	<!-- 保存修改后的数据  -->
+	<update id="update">
+		update book_info
+		set		
+		
+		bookISBN=#{bookISBN},
+		bookTitle=#{bookTitle},
+		bookAuthor=#{bookAuthor},
+		bookPress=#{bookPress},
+		bookPublish=#{bookPublish},
+		bookPrintCount=#{bookPrintCount},
+		bookCategoryId=#{bookCategoryId},
+		bookComment=#{bookComment},
+		bookPrice=#{bookPrice}
+		where 
+		bookBarCode=#{bookBarCode}
+	</update>
+	
+	<!-- 添加图书主信息  -->
+	<insert id="insertBP">
+		insert into book_primary(bookSeat,bookBarCode,bookStatusId,bookBorrowCount)
+		values
+		(
+		#{bookSeat},#{bookBarCode},#{bookStatusId},#{bookBorrowCount}
+		)		
+	</insert>
+	
+	<!-- 更新图书状态 -->
+	<update id="updateBookSeat">
+		update book_seat set seatStatus = #{seatStatus} where bookSeat=#{bookSeat}
+	</update>
+	
+	<!-- 更新图书数量 -->
+	<update id="updateBookCount">
+		update book_info set bookCount = #{bookCount} where bookBarCode=#{bookBarCode}
+	</update>
+	<!-- 更新图书类别总数量 -->
+	<update id="updateBookCategory">
+		update book_category set categoryCount = categoryCount - 1 where bookCategoryId=#{bookCategoryId}
+	</update>
+	<!-- 获取位置 -->
+	<select id="getBookSeat" resultType="string">
+		select bookSeat from book_primary where bookBarCode=#{id}
+	</select>
+	<!-- 根据图书类别作为信息 -->
+	<select id="getSeatById" resultType="com.bl.book.beans.bo.BookSeat">
+		select * from book_seat where bookSeat like '%' #{categoryId} '%' and seatStatus = 1 and bookSeat in 
+		(
+		select bookSeat from book_primary where bookStatusId = 1
+		)
+	</select>
+	<!-- 根据图书位置获取图书信息 -->
+	<select id="queryBookBySeat" resultType="com.bl.book.beans.bo.BookInfo">
+		select * from book_info where bookBarCode 
+		in 
+		(
+		select bookBarCode from book_primary where bookSeat=#{seat}
+		)
+	</select>
+	<!-- 删除主表信息-->
+	<delete id="deleteBP">
+		delete from book_primary where bookBarCode=#{bookBarCode}
+	</delete>
+	<!-- 获取新入馆的图书 -->
+	<select id="getBookIntoTime" resultType="com.bl.book.beans.bo.BookInfo">
+		select * from book_info where bookBarCode in(
+		select t.bookBarCode from 
+		(select distinct bookBarCode from book_intoTime order by intoTime) t		
+		)
+		limit #{0}
+	</select>
+	<!-- 获取公告 -->
+	<select id="getNotice" resultType="com.bl.book.beans.bo.Notice">
+		select * from notice order by noticeTime		
+		limit #{0}
+	</select>
+	<!-- 根据id获取公告 -->
+	<select id="getNoticeById" resultType="com.bl.book.beans.bo.Notice">
+		select * from notice where id=#{id}		
+	</select>
+</mapper>

@@ -14,22 +14,22 @@
     <!-- spring从properties里面读取jdbc配置文件 -->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:/application-*.properties"/>
 
-    <bean class="com.critc.core.spring.SpringContextHolder" lazy-init="false"/>
+    <bean class="com.bl.core.spring.SpringContextHolder" lazy-init="false"/>
     <context:annotation-config/>
-    <context:component-scan base-package="com.critc"></context:component-scan>
+    <context:component-scan base-package="com.bl"></context:component-scan>
 
     <!--添加声明，为Spring容器中那些匹配@AspectJ切面的Bean创建代理，其中的proxy-target-class="true"
         表示使用CGLib动态代理技术织入增强 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <!--dao和service异常切面 -->
-    <bean id="daoExceptionAspect" class="com.critc.core.aop.DaoExceptionAspect"/>
-    <bean id="serviceExceptionAspect" class="com.critc.core.aop.ServiceExceptionAspect"/>
+    <bean id="daoExceptionAspect" class="com.bl.core.aop.DaoExceptionAspect"/>
+    <bean id="serviceExceptionAspect" class="com.bl.core.aop.ServiceExceptionAspect"/>
 
     <!-- 系统性能监控切面-->
-    <bean id="performanceAspect" class="com.critc.core.aop.PerformanceAspect"/>
+    <bean id="performanceAspect" class="com.bl.core.aop.PerformanceAspect"/>
 
     <!--设置公共参数 -->
-    <bean id="pubConfig" class="com.critc.core.pub.PubConfig">
+    <bean id="pubConfig" class="com.bl.core.pub.PubConfig">
         <property name="imageServer" value="${imageServer}"/>
         <property name="imageUploadPath" value="${imageUploadPath}"/>
         <property name="staticServer" value="${staticServer}"/>

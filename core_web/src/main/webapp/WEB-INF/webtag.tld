@@ -10,27 +10,27 @@
     <function>
         <description>系统管理-用户管理获取用户状态</description>
         <name>getUserStatus</name>
-        <function-class>com.critc.util.web.WebTag</function-class>
+        <function-class>com.bl.book.util.web.WebTag</function-class>
         <function-signature>java.lang.String getUserStatus(java.lang.Integer)</function-signature>
     </function>
     <function>
         <description>生成菜单</description>
         <name>createMenu</name>
-        <function-class>com.critc.util.web.WebTag</function-class>
+        <function-class>com.bl.book.util.web.WebTag</function-class>
         <function-signature>java.lang.String createMenu(javax.servlet.http.HttpServletRequest)</function-signature>
     </function>
 
     <function>
         <description>校验按钮权限</description>
         <name>isP</name>
-        <function-class>com.critc.util.web.WebTag</function-class>
+        <function-class>com.bl.book.util.web.WebTag</function-class>
         <function-signature>boolean isPrivilege(java.lang.String)</function-signature>
     </function>
 
     <function>
         <description>生成下拉框</description>
         <name>createCombo</name>
-        <function-class>com.critc.util.web.WebTag</function-class>
+        <function-class>com.bl.book.util.web.WebTag</function-class>
         <function-signature>java.lang.String
             createCombo(java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String)
         </function-signature>
@@ -38,7 +38,7 @@
     <function>
         <description>生成固定值下拉框</description>
         <name>createCombo2</name>
-        <function-class>com.critc.util.web.WebTag</function-class>
+        <function-class>com.bl.book.util.web.WebTag</function-class>
         <function-signature>java.lang.String
             createCombo2(java.lang.String,java.lang.String,java.lang.Integer,java.lang.String,java.lang.String,java.lang.String)
         </function-signature>

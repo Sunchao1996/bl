@@ -40,7 +40,11 @@
     </bean>
     <!-- 支持上传文件 -->
     <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="1048576" />
+        <property name="defaultEncoding" value="UTF-8" />
+
+    </bean>
     <!--设置视图解析器及视图对应文件位置和后缀名，当前设置jsp -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" parent="viewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
@@ -48,7 +52,7 @@
     </bean>
     <!-- 设置注解的扫描包名t -->
     <mvc:default-servlet-handler/>
-    <context:component-scan base-package="com.critc.*.controller">
+    <context:component-scan base-package="com.bl.*.controller">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
@@ -58,12 +62,12 @@
             <mvc:mapping path="/index.htm"/>
             <mvc:mapping path="/sys/index.htm"/>
             <mvc:mapping path="/sys/*/*"/>
-            <bean class="com.critc.core.interceptor.CheckLoginInterceptor"></bean>
+            <bean class="com.bl.core.interceptor.CheckLoginInterceptor"></bean>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/sys/index.htm"/>
             <mvc:mapping path="/sys/*/*"/>
-            <bean class="com.critc.core.interceptor.AuthorityInterceptor"></bean>
+            <bean class="com.bl.core.interceptor.AuthorityInterceptor"></bean>
         </mvc:interceptor>
     </mvc:interceptors>
 

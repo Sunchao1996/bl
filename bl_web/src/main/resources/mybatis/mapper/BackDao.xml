@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bl.book.dao.BackDao">
+	<!-- 查询条件拼接 -->
+	<sql id="pagewhere">
+		<where>
+			<if test="readerId != null and readerId != ''">
+				and readerId =#{readerId}
+			</if>
+			<if test="startBorrowTime != null">
+				and #{startBorrowTime} >= borrowTime 
+			</if>
+			<if test="endBorrowTime != null">
+				and  borrowTime >= #{endBorrowTime} 
+			</if>
+			<if test="startBackTime != null">
+				and #{startBackTime} >= backTime 
+			</if>
+			<if test="endBackTime != null">
+				 and backTime >= #{endBackTime} 
+			</if>
+			<if test="startReturnTime != null">
+				and #{startReturnTime} >= returnTime 
+			</if>
+			<if test="endReturnTime != null">
+				 and returnTime >= #{endReturnTime} 
+			</if>
+			<if test="borrowStatus != -1">
+				and borrowStatus =#{borrowStatus}
+			</if>
+			<if test="bookSeat != null and bookSeat != ''">
+				and bookSeat like #{bookSeat} '%'
+			</if>
+			<if test="bookBarCode != null and bookBarCode != ''">
+				and bookBarCode =#{bookBarCode}
+			</if>
+		</where>
+	</sql>
+	<!-- 根据条件统计数量 -->
+	<select id="pageCount" resultType="int">
+		select count(*) from borrow_info
+		<include refid="pagewhere" />
+	</select>
+	<!-- 分页查询 -->
+	<select id="queryByPage" resultType="com.bl.book.beans.bo.BorrowInfo">
+		select * from borrow_info
+		<include refid="pagewhere" />
+		limit #{startLine},#{pageSize}
+	</select>
+	<!-- 还书更新数据库 -->
+	<update id="update">
+		update borrow_info set returnTime=#{returnTime},borrowStatus=#{borrowStatus} where borrowId=#{borrowId}
+	</update>
+	<!-- 丢失图书更新库存 -->
+	<update id="updateLose">
+		update book_info set bookCount=bookCount-1 where bookBarCode in (select bookBarCode from borrow_info where borrowId=#{borrowId})
+	</update>
+	<!-- 丢失图书更新图书位置状态 -->
+	<update id="updateSeat">
+		update book_seat set seatStatus=0 where bookSeat in (select bookSeat from borrow_info where borrowId=#{borrowId})
+	</update>
+	<!-- 丢失图书更新图书位置状态 -->
+	<update id="updateCategory">
+		update book_category set categoryCount=categoryCount-1 where bookCategoryId in 
+		(select bookCategoryId from book_info where bookBarCode in
+		(select bookBarCode from borrow_info where borrowId=#{borrowId}))
+	</update>
+	<!-- 丢失图书删除图书主要信息表中数据 -->
+	<delete id="deleteBookP">
+		delete from book_primary where bookSeat in (select bookSeat from borrow_info where borrowId=#{borrowId})
+	</delete>
+	
+</mapper>

@@ -3,10 +3,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/aop
 	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd"
        default-autowire="byName" default-lazy-init="true">
@@ -14,26 +17,94 @@
     <!-- spring从properties里面读取jdbc配置文件 -->
     <context:property-placeholder ignore-unresolvable="true" location="classpath:/application-*.properties"/>
 
-    <bean class="com.critc.core.spring.SpringContextHolder" lazy-init="false"/>
+    <bean class="com.bl.core.spring.SpringContextHolder" lazy-init="false"/>
     <context:annotation-config/>
-    <context:component-scan base-package="com.critc"></context:component-scan>
+    <context:component-scan base-package="com.bl"></context:component-scan>
 
     <!--添加声明，为Spring容器中那些匹配@AspectJ切面的Bean创建代理，其中的proxy-target-class="true"
         表示使用CGLib动态代理技术织入增强 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
     <!--dao和service异常切面 -->
-    <bean id="daoExceptionAspect" class="com.critc.core.aop.DaoExceptionAspect"/>
-    <bean id="serviceExceptionAspect" class="com.critc.core.aop.ServiceExceptionAspect"/>
+    <bean id="daoExceptionAspect" class="com.bl.core.aop.DaoExceptionAspect"/>
+    <bean id="serviceExceptionAspect" class="com.bl.core.aop.ServiceExceptionAspect"/>
 
     <!-- 系统性能监控切面-->
-    <bean id="performanceAspect" class="com.critc.core.aop.PerformanceAspect"/>
+    <bean id="performanceAspect" class="com.bl.core.aop.PerformanceAspect"/>
 
     <!--设置公共参数 -->
-    <bean id="pubConfig" class="com.critc.core.pub.PubConfig">
+    <bean id="pubConfig" class="com.bl.core.pub.PubConfig">
         <property name="imageServer" value="${imageServer}"/>
         <property name="imageUploadPath" value="${imageUploadPath}"/>
         <property name="staticServer" value="${staticServer}"/>
         <property name="dynamicServer" value="${dynamicServer}"/>
         <property name="fileUploadPath" value="${fileUploadPath}"/>
     </bean>
+
+    <!--mybatis-->
+    <!--ali-->
+    <bean id="logFilter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter">
+        <property name="statementExecutableSqlLogEnable" value="true"/>
+    </bean>
+    <bean id="dataSourceBook" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/book_manage"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="initialSize" value="2"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="10"/>
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000"/>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 'x' from dual"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <!-- 配置监控统计拦截的filters -->
+        <property name="filters" value="stat"/>
+        <property name="proxyFilters">
+            <list>
+                <ref bean="logFilter"/>
+            </list>
+        </property>
+    </bean>
+    <!--ali-->
+    <!-- 注册Dao对象， 使用MyBatis的动态代理对象 -->
+    <!-- 注册SqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
+        <property name="dataSource" ref="dataSourceBook" />
+        <property name="configLocation" value="classpath:mybatis/mybatis.xml" />
+        <property name="mapperLocations" value="classpath*:mybatis/mapper/*.xml" />
+    </bean>
+
+    <!-- 注册动态代理扫描器：Dao接口的代理对象 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 指定SqlSessionFactorty -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <!-- 指定Dao接口的bao -->
+        <property name="basePackage" value="com.bl.book.dao" />
+    </bean>
+    <!-- 事务 AspectJ -->
+    <!-- 注册事务管理器 -->
+    <bean id="transactionManagerBook" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 注册事务的通知 -->
+    <tx:advice id="myAdviceBook" transaction-manager="transactionManagerBook">
+        <!-- 指定事务的特性 -->
+        <tx:attributes>
+            <tx:method name="*" isolation="DEFAULT" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+            <tx:method name="query*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut expression="execution(* *..service.impl.*.*(..))" id="servicePt"/>
+        <aop:advisor advice-ref="myAdviceBook" pointcut-ref="servicePt"/>
+    </aop:config>
 </beans>

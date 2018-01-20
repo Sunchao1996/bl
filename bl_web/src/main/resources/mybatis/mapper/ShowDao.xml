@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bl.book.dao.ShowDao">
+	<select id="queryList" resultType="com.bl.book.beans.vo.ShowCharts">
+		select bc.*,IFNULL(sum(bp.bookBorrowCount),0) as borrowCount
+		FROM	
+		book_category bc
+		left JOIN
+		book_primary bp
+		ON
+		bp.bookSeat in (select DISTINCT bi.bookSeat
+										from 
+										borrow_info bi
+										<where>
+											<choose>
+												<when test="startBorrowTime != null and endBorrowTime != null">
+													bi.borrowTime BETWEEN #{startBorrowTime} and #{endBorrowTime}												
+												</when>
+												<when test="startBorrowTime != null">
+													bi.borrowTime >= #{startBorrowTime}												
+												</when>
+												<when test="endBorrowTime != null">
+													bi.borrowTime &lt;= #{endBorrowTime}												
+												</when>
+											</choose>
+										</where>
+										)
+		and
+		bp.bookSeat like CONCAT('%',bc.bookCategoryId,'%')
+		where bc.categoryCount > 0
+		group by  
+		bc.bookCategory;
+		
+		
+				
+	</select>
+</mapper>

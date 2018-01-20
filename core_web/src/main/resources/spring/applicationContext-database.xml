@@ -71,7 +71,7 @@
 
     <aop:config>
         <aop:pointcut id="bussinessService"
-                      expression="execution(public * com.critc.*.service.*.*(..))"/>
+                      expression="execution(public * com.bl.*.service.*.*(..))"/>
         <aop:advisor pointcut-ref="bussinessService" advice-ref="txAdvice"/>
     </aop:config>
 
@@ -83,7 +83,7 @@
     <bean id="druid-stat-pointcut" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
         <property name="patterns">
             <list>
-                <value>com.critc.*.*.service.*</value>
+                <value>com.bl.*.*.service.*</value>
             </list>
         </property>
     </bean>

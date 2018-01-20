@@ -43,7 +43,7 @@
              <%--    <div class="form-group">
                     <label class="col-md-3 control-label">类型：</label>
                     <div class="col-md-9">
-                        ${critc:createCombo2('{1:模块,2:功能}',sysResource.type,0,'type','type','form-control input-inline input-xlarge' )}
+                        ${bl:createCombo2('{1:模块,2:功能}',sysResource.type,0,'type','type','form-control input-inline input-xlarge' )}
                     </div>
                 </div> --%>
                 <div class="form-group">

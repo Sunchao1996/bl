@@ -1,4 +1,4 @@
-<%@page import="com.critc.sys.service.SysOnlineUserService"%>
+<%@page import="com.bl.sys.service.SysOnlineUserService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	import="com.baidu.ueditor.ActionEnter"
     pageEncoding="UTF-8"%>

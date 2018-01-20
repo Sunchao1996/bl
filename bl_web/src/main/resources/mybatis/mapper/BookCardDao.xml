@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bl.book.dao.BookCardDao">
+	
+	<!-- 查询所有的图书卡状态信息-->
+	<select id="queryAllObj" resultType="com.bl.book.beans.bo.BookCardStatus">
+		select * from book_card_status
+	</select>
+	<!-- 根据条件统计个数 -->
+	<select id="queryCount" resultType="int">
+		select count(*) from book_card
+		<where>
+			<if test="bookCardId != null and bookCardId != ''">
+				and bookCardId like '%' #{bookCardId} '%'
+			</if>
+			<if test="startTime != null and startTime != ''">
+				and regTime >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				and #{endTime} >= regTime  
+			</if>
+			<if test="cardStatusId != 0">
+				and cardStatusId = #{cardStatusId}
+			</if>
+			and bookCardId in (select bookCardId from book_readers)
+		</where>
+	</select>
+	<!-- 分页查询 -->
+	<select id="queryByPage" resultType="com.bl.book.beans.bo.BookCard">
+		select * from book_card
+		<where>
+			<if test="bookCardId != null and bookCardId != ''">
+				and bookCardId like '%' #{bookCardId} '%'
+			</if>
+			<if test="startTime != null and startTime != ''">
+				and regTime >= #{startTime}
+			</if>
+			<if test="endTime != null and endTime != ''">
+				and #{endTime} >= regTime  
+			</if>
+			<if test="cardStatusId != 0">
+				and cardStatusId = #{cardStatusId}
+			</if>
+			and bookCardId in (select bookCardId from book_readers)
+		</where>
+		limit #{startLine},#{pageSize}
+	</select>
+	<!-- 根据id查询 -->
+	<select id="findById" resultType="com.bl.book.beans.bo.BookCard">
+		select * from book_card
+		where bookCardId=#{bookCardId}
+	</select>
+	<!-- 添加图书卡 -->
+	<insert id="insert">
+		insert into book_card(bookCardId,regTime,cardStatusId,endTime)
+		values(#{bookCardId},#{regTime},#{cardStatusId},#{endTime})
+	</insert>
+	<!-- 禁用图书卡 -->
+	<update id="delete">
+		update book_card set cardStatusId = 0,endTime = #{endTime} where bookCardId=#{bookCardId}
+	</update>
+	<!-- 删除图书卡 -->
+	<delete id="deleteT">
+		delete from book_card where bookCardId=#{bookCardId}
+	</delete>
+</mapper>

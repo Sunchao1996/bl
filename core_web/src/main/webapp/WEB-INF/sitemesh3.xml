@@ -16,7 +16,7 @@
     
     <!-- 自定义标签 -->
     <content-processor>
-        <tag-rule-bundle class="com.critc.core.tagrules.ScriptTagRuleBundle" />
-        <tag-rule-bundle class="com.critc.core.tagrules.CssTagRuleBundle" />
+        <tag-rule-bundle class="com.bl.core.tagrules.ScriptTagRuleBundle" />
+        <tag-rule-bundle class="com.bl.core.tagrules.CssTagRuleBundle" />
     </content-processor>
 </sitemesh>

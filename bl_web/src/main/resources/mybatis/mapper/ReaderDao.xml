@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bl.book.dao.ReaderDao">
+	<!-- 新增用户 -->
+	<insert id="insert">
+		insert into book_readers(readerId,readerName,readerGender,readerTel,readerCardId,readerStatusId,bookCardId)
+		values(
+		#{readerId},
+		#{readerName},
+		#{readerGender},
+		#{readerTel},
+		#{readerCardId},
+		#{readerStatusId},
+		#{bookCardId})
+	</insert>
+	<!-- 获取读者所有状态 -->
+	<select id="queryAllStatus" resultType="com.bl.book.beans.bo.ReaderStatus">
+		select * from reader_status
+	</select>
+	<!-- 获取读者记录数 -->
+	<select id="queryCount" resultType="int">
+		select count(*) from book_readers
+		<where>
+			<if test="readerName != null and readerName != ''">
+				and readerName like '%' #{readerName} '%' 
+			</if>
+			<if test="readerTel != null and readerTel != ''">
+				and readerTel like '%' #{readerTel} '%' 
+			</if>
+			<if test="bookCardId != null and bookCardId != ''">
+				and bookCardId like '%' #{bookCardId} '%' 
+			</if>
+			<if test="readerStatusId != -2">
+				and readerStatusId = #{readerStatusId} 
+			</if>			
+		</where>
+	</select>
+	<!-- 分页查询 -->
+	<select id="getByPage" resultType="com.bl.book.beans.bo.Reader">
+		select * from book_readers
+		<where>
+			<if test="readerName != null and readerName != ''">
+				and readerName like '%' #{readerName} '%' 
+			</if>
+			<if test="readerTel != null and readerTel != ''">
+				and readerTel like '%' #{readerTel} '%' 
+			</if>
+			<if test="bookCardId != null and bookCardId != ''">
+				and bookCardId like '%' #{bookCardId} '%' 
+			</if>
+			<if test="readerStatusId != -2">
+				and readerStatusId = #{readerStatusId} 
+			</if>			
+		</where>
+		limit #{startLine},#{pageSize}
+	</select>
+	<!-- 根据读者id查询读者信息-->
+	<select id="findById" resultType="com.bl.book.beans.bo.Reader">
+		select * from book_readers
+		where readerId = #{readerId}
+	</select>
+	<!-- 更新读者状态 -->
+	<update id="updateStatus">
+		update book_readers set readerStatusId= #{readerStatusId}
+		<where>
+			<if test="readerId != null and readerId != ''">
+				and readerId=#{readerId}	
+			</if>		
+			<if test="readerCardId != null and readerCardId != ''">
+				and readerCardId=#{readerCardId}
+			</if>
+		  	and readerStatusId != 0
+		</where>
+	</update>
+	<!-- 验证读者和图书卡是否能用 -->
+	<select id="validate" resultType="int">
+		select count(*) from book_readers br join book_card bc on br.readerId=bc.bookCardId and bc.bookCardId=#{readerId} and br.readerId=#{readerId} and br.readerStatusId=1 and bc.cardStatusId=1
+	</select>
+	<!-- 验证读者和图书卡是否能用 -->
+	<select id="getByS" resultType="com.bl.book.beans.bo.Reader">
+		select * from book_readers where readerCardId = #{readerCardId} and readerStatusId = 1
+	</select>
+</mapper>
