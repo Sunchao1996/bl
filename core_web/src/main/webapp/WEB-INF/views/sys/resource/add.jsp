@@ -43,8 +43,8 @@
 					<div class="col-md-9">
 						<select id="resourceLevel" name="resourceLevel"
 								class="form-control input-inline input-xlarge">
-							<option id="ptsel" value="1" >平台管理</option>
-							<option id="ptsel2" value="0" selected="selected">应用系统</option>
+							<option id="ptsel" value="1" >管理</option>
+							<option id="ptsel2" value="0" selected="selected">应用</option>
 						</select>
 
 					</div>

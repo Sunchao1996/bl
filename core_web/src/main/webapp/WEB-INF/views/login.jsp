@@ -271,7 +271,7 @@
     <div class="row bs-reset">
         <div class="col-md-6 login-container bs-reset">
             <div class="login-logo login-6 row">
-                <h1 class="col-md-4"><b>B</b><b style="color: #4BA5F8">L</b></h1>
+                <h1 class="col-md-4"><b>Big</b><b style="color: #4BA5F8">Library</b></h1>
                 <h3 class="col-md-8" style="color: #a0a9b4;margin-top:7%;"></h3>
             </div>
             <div class="login-content">
