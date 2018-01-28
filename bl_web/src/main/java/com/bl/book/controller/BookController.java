@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.bl.core.pub.PubConfig;
 import com.bl.util.code.GlobalCode;
+import com.bl.util.json.JsonUtil;
 import org.json.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,11 +71,21 @@ public class BookController {
             return "forward:/success.htm?resultCode=" + GlobalCode.OPERA_SUCCESS;
     }
 
-    //通过表单添加单个图书类别
-    @RequestMapping("addBookCategory.do")
-    @ResponseBody
-    public Object addBookCategory(BookCategory bookCategory) {
+    /**
+     * 跳转到图书类别添加页面
+     *
+     * @return
+     */
+    @RequestMapping("/books/category/toAdd.htm")
+    public String toBookCategoryAdd(HttpServletRequest request) {
+        request.setAttribute("backUrl", pubConfig.getDynamicServer() + "/books/category/toAdd.htm");
+        return "book/bookcategory/add";
+    }
 
+    //通过表单添加单个图书类别
+    @RequestMapping("/books/category/addOne.htm")
+    @ResponseBody
+    public String addBookCategory(BookCategory bookCategory) {
         Map<String, Object> jsonMap = new HashMap<String, Object>();
         try {
             bookService.addBookCategory(bookCategory);
@@ -83,12 +94,12 @@ public class BookController {
             e.printStackTrace();
             jsonMap.put("success", false);
         }
-        return jsonMap;
+        return JsonUtil.toStr(jsonMap);
 
     }
 
     //通过文件添加图书类别
-    @RequestMapping("addBookCategorys.do")
+    @RequestMapping("/books/category/addMore.htm")
     @ResponseBody
     public Object addBookCategorys(MultipartFile bookCategorys, HttpServletRequest request) {
         Map<String, Object> jsonMap = new HashMap<String, Object>();
@@ -139,8 +150,10 @@ public class BookController {
      * @功能描述 跳转到添加页面
      */
     @RequestMapping("/books/toAdd.htm")
-    public String insertIndex(HttpServletRequest request) {
-        request.setAttribute("backUrl",pubConfig.getDynamicServer()+"/books/toAdd.htm");
+    public String insertIndex(HttpServletRequest request, Model model) {
+        request.setAttribute("backUrl", pubConfig.getDynamicServer() + "/book/books/toAdd.htm");
+        List<BookCategory> bookCategoryList = bookService.queryBookCategoryAll();
+        model.addAttribute("bookCategoryList", bookCategoryList);
         return "book/books/add";
     }
 
@@ -157,20 +170,22 @@ public class BookController {
      * @return
      * @功能描述 添加图书
      */
-    @RequestMapping("insert.do")
-    @ResponseBody
-    public Object insert(BookInfo book) {
+    @RequestMapping("/books/add.htm")
+    public String insert(BookInfo book) {
         Map<String, Object> jsonMap = new HashMap<>();
 
         int count = bookService.insert(book);
-        if (count == -1) {
-            jsonMap.put("success", "full");
-        } else if (count < 3) {
-            jsonMap.put("success", false);
-        } else {
-            jsonMap.put("success", true);
-        }
-        return jsonMap;
+//        if (count == -1) {
+//            jsonMap.put("success", "full");
+//        } else if (count < 3) {
+//            jsonMap.put("success", false);
+//        } else {
+//            jsonMap.put("success", true);
+//        }
+        if (count < 3)
+            return "forward:/error.htm?resultCode=" + GlobalCode.OPERA_FAILURE;
+        else
+            return "forward:/success.htm?resultCode=" + GlobalCode.OPERA_SUCCESS;
     }
 
     /**

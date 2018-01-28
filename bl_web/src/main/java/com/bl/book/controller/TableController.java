@@ -13,4 +13,8 @@ public class TableController {
     public String index(){
         return "book/table/table";
     }
+    @RequestMapping("/index1")
+    public String index1(){
+        return "book/table/table1";
+    }
 }
