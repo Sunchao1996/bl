@@ -188,21 +188,17 @@ public class BookController {
             return "forward:/success.htm?resultCode=" + GlobalCode.OPERA_SUCCESS;
     }
 
-    /**
-     * @param book
-     * @return
-     * @功能描述 跳转页面
-     */
-    @RequestMapping("index.do")
-    public String index() {
-        return "book/index";
-    }
 
-    @RequestMapping("list.do")
+    /**
+     * 图书首页
+     * @param model
+     * @return
+     */
+    @RequestMapping("/books/list.htm")
     public String list(Model model) {
         List<BookCategory> bookCategoryList = bookService.queryBookCategoryAll();
         model.addAttribute("bookCategoryList", bookCategoryList);
-        return "book/list";
+        return "book/books/list";
     }
 
     /**
