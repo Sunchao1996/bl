@@ -77,15 +77,6 @@
                                         id="realnameTip"></label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">姓名拼音：</label>
-                                <div class="col-md-9">
-                                    <input id="pinyin" type="text" name="pinyin"
-                                           class="form-control input-inline input-medium"
-                                           placeholder="" value="${sysUser.pinyin}"><label
-                                        id="pinyinTip"></label>
-                                </div>
-                            </div>
                             <div class="form-group" style="margin-bottom:-20px;">
                                 <label class="col-md-3 control-label">性别：</label>
                                 <div class="col-md-9 ">
@@ -127,54 +118,10 @@
                                     <label id="roleIdTip"></label>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">部门：</label>
-                                <div class="col-md-9">
-                                    <div class="input-group input-medium">
-                                        <input type="hidden" id="departmentId" name="departmentId"
-                                               class="form-control" value="${sysUser.departmentId}"/>
-                                        <input id="departmentName" type="text" name="departmentName"
-                                               readonly="readonly"
-                                               class="form-control  "
-                                               placeholder="" value="${sysUser.departmentName}"/>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-primary" id="choice"
-                                                    onclick="javascript:showSelTree()"
-                                                    type="button"><i class="fa fa-search"/></i>选择
-                                        </button>
-                                       </span>
-                                    </div>
-                                    <label id="departmentNameTip"></label>
-                                </div>
-                            </div>
 
 
                         </div>
 
-                        <div class=" col-md-4">
-                            <!-- PORTLET MAIN -->
-                            <div class="portlet light   bg-inverse" style="width:200px;height:250px;margin:0 auto">
-                                <!-- SIDEBAR USERPIC -->
-                                <div class="row" style="width:90%;margin:0 auto">
-                                    <input type="hidden" class="avatar" name="avatar" value="${sysUser.avatar}">
-                                    <img id="imgAvatar" src="${imageServer}${sysUser.avatar}"
-                                         onerror="this.onerror=null;this.src='${imageServer}/sys/user/avatar/male.jpg'"
-                                         class="img-responsive" alt="">
-                                </div>
-                                <!-- END SIDEBAR USERPIC -->
-                                <!-- SIDEBAR BUTTONS -->
-                                <br/>
-                                <div class="row" style="text-align:center">
-                                    <button type="button"
-                                            class="btn btn-circle blue btn-sm"
-                                            id="btnEditAvatar">修改头像
-                                    </button>
-
-                                </div>
-                                <br/>
-                                <!-- END SIDEBAR BUTTONS -->
-                            </div>
-                        </div>
 
                     </div>
                 </div>
@@ -191,65 +138,12 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label">职务：</label>
-                            <div class="col-md-8 ">
-                                <form:select path="sysUser.jobTitle" name="jobTitle"
-                                             class="form-control input-inline" style="width:90%"
-                                             id="jobTitle">
-                                    <option value="">请选择职务</option>
-                                    <form:options items="${listJobTitle }" itemValue="name"
-                                                  itemLabel="name"/>
-                                </form:select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label">职称：</label>
-                            <div class="col-md-8">
-                                <form:select path="sysUser.post" name="post"
-                                             class="form-control input-inline" style="width:90%"
-                                             id="post">
-                                    <option value="">请选择职称</option>
-                                    <form:options items="${listPost }" itemValue="name"
-                                                  itemLabel="name"/>
-                                </form:select>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
                             <label class="col-md-4 control-label">身份证号：</label>
                             <div class="col-md-8">
                                 <input id="idcard" type="text" name="idcard"
                                        class="form-control input-inline " style="width:90%"
                                        placeholder="" value="${sysUser.idcard}"><label
                                     id="idcardTip"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label">政治面貌：</label>
-                            <div class="col-md-8">
-                                <form:select path="sysUser.political" name="political"
-                                             class="form-control input-inline " style="width:90%"
-                                             id="political">
-                                    <option value="">请选择政治面貌</option>
-                                    <form:options items="${listPolitical}" itemValue="name"
-                                                  itemLabel="name"/>
-                                </form:select>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label">民族：</label>
-                            <div class="col-md-8">
-                                <form:select path="sysUser.nation" name="nation"
-                                             class="form-control input-inline " style="width:90%"
-                                             id="nation">
-                                    <option value="">请选择民族</option>
-                                    <form:options items="${listNation }" itemValue="name"
-                                                  itemLabel="name"/>
-                                </form:select>
                             </div>
                         </div>
                     </div>
@@ -266,34 +160,16 @@
                                 </form:select>
                             </div>
                         </div>
-
                         <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label">毕业院校：</label>
+                            <label class="col-md-4 control-label">民族：</label>
                             <div class="col-md-8">
-                                <input id="graduatedSchool" type="text" name="graduatedSchool"
-                                       class="form-control input-inline " style="width:90%"
-                                       placeholder="" value="${sysUser.graduatedSchool}"/><label
-                                    id="graduatedSchoolTip"></label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label">座机：</label>
-                            <div class="col-md-8">
-                                <input id="telephone" type="text" name="telephone"
-                                       class="form-control input-inline " style="width:90%"
-                                       placeholder="" value="${sysUser.telephone}"><label
-                                    id="telephoneTip"></label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-md-4 control-label">专业：</label>
-                            <div class="col-md-8">
-                                <input id="major" type="text" name="major"
-                                       class="form-control input-inline " style="width:90%"
-                                       placeholder="" value="${sysUser.major}"><label
-                                    id="majorTip"></label>
+                                <form:select path="sysUser.nation" name="nation"
+                                             class="form-control input-inline " style="width:90%"
+                                             id="nation">
+                                    <option value="">请选择民族</option>
+                                    <form:options items="${listNation }" itemValue="name"
+                                                  itemLabel="name"/>
+                                </form:select>
                             </div>
                         </div>
                     </div>
@@ -627,11 +503,11 @@
                 comple  =${sysUser.completion};
             }
             if(comple!=null&&comple>=80){
-                $("#completion").html('完整度:'+comple+' %' ).css('color','green');
+               // $("#completion").html('完整度:'+comple+' %' ).css('color','green');
             }else if(comple!=null&&comple>=50&&comple<80){
-                $("#completion").html('完整度:'+comple+' %' ).css('color','gold');
+                //$("#completion").html('完整度:'+comple+' %' ).css('color','gold');
             }else{
-                $("#completion").html('完整度:'+comple+' %' ).css('color','red');
+                //$("#completion").html('完整度:'+comple+' %' ).css('color','red');
             }
         }
         function getZtree(data) {

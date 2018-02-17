@@ -1,14 +1,20 @@
 package com.bl.book.controller;
 
+import java.awt.print.Book;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.bl.book.condition.child.BorrowInfoCond;
+import com.bl.book.util.StringUtil;
 import com.bl.core.pub.PubConfig;
 import com.bl.util.code.GlobalCode;
+import com.bl.util.global.GlobalConst;
+import com.bl.util.page.PageNavigate;
 import com.bl.util.session.UserSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +26,7 @@ import com.bl.book.beans.bo.Reader;
 import com.bl.book.beans.bo.User;
 import com.bl.book.condition.child.BookCardCond;
 import com.bl.book.service.BookCardService;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author chao
@@ -86,30 +93,56 @@ public class BookCardController {
     /**
      * @功能描述 分页查询图书卡
      */
-    @RequestMapping("getByPage.htm")
-    @ResponseBody
-    public Object getByPage(BookCardCond cond) {
-        Map jsonMap = new HashMap<>();
-        jsonMap.put("dataList", service.getByPage(cond));
-        jsonMap.put("total", cond.getTotal());
-        return jsonMap;
+    @RequestMapping("/bookcard/index.htm")
+    public ModelAndView getByPage(BookCardCond cond, Integer pageIndex) {
+        if (cond.getPageSize() == null) {
+            cond.setPageSize(GlobalConst.PAGESIZE);
+        }
+        cond.setPageNo(pageIndex);
+        if (cond.getPageNo() == null) {
+            cond.setPageNo(1);
+        }
+        ModelAndView mv = new ModelAndView();
+        String url = createUrl(cond);
+        List<BookCard> list = service.getByPage(cond);
+        mv.addObject("list", list);
+        PageNavigate pageNavigate = new PageNavigate(url, cond.getPageNo(), cond.getTotal());// 定义分页对象
+        mv.addObject("pageNavigate", pageNavigate);// 设置分页的变量
+        mv.addObject("vo", cond);// 设置分页的变量
+        mv.addObject("backUrl", StringUtil.encodeUrl(url));// 设置分页的变量
+        mv.setViewName("/book/bookcard/index");
+        return mv;
+    }
+
+    public String createUrl(BookCardCond cond) {
+        String url = pubConfig.getDynamicServer() + "/book/bookcard/index.htm?";
+        if (StringUtil.isNotNullOrEmpty(cond.getBookCardId())) {
+            url += "&bookCardId=" + cond.getBookCardId();
+        }
+        if (cond.getCardStatusId() != -1) {
+            url += "&cardStatusId=" + cond.getCardStatusId();
+        }
+        if (cond.getStartTime() != null) {
+            url += "&startTime=" + cond.getStartTime();
+        }
+        if (cond.getEndTime() != null) {
+            url += "&endTime=" + cond.getEndTime();
+        }
+        return url;
     }
 
     /**
      * @功能描述 禁用图书卡
      */
-    @RequestMapping("delete.htm")
-    @ResponseBody
-    public Object delete(String[] ids) {
-        Map jsonMap = new HashMap<>();
+    @RequestMapping("/bookcard/delete.htm")
+    public String delete(String id) {
         try {
-            service.delete(ids);
-            jsonMap.put("success", true);
+            service.delete(id);
+            return "forward:/success.htm?resultCode=" + GlobalCode.OPERA_SUCCESS;
         } catch (Exception e) {
-            jsonMap.put("success", false);
             e.printStackTrace();
+            return "forward:/error.htm?resultCode=" + GlobalCode.OPERA_FAILURE;
         }
-        return jsonMap;
     }
 
     /**

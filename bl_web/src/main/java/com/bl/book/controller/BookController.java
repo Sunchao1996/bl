@@ -1,15 +1,23 @@
 package com.bl.book.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.bl.book.util.StringUtil;
 import com.bl.core.pub.PubConfig;
+import com.bl.sys.model.SysUser;
 import com.bl.util.code.GlobalCode;
+import com.bl.util.global.GlobalConst;
 import com.bl.util.json.JsonUtil;
+import com.bl.util.page.PageNavigate;
+import com.bl.util.web.WebUtil;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.json.HTTP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,8 +92,7 @@ public class BookController {
 
     //通过表单添加单个图书类别
     @RequestMapping("/books/category/addOne.htm")
-    @ResponseBody
-    public String addBookCategory(BookCategory bookCategory) {
+    public void addBookCategory(BookCategory bookCategory,HttpServletResponse response) throws IOException {
         Map<String, Object> jsonMap = new HashMap<String, Object>();
         try {
             bookService.addBookCategory(bookCategory);
@@ -94,7 +101,7 @@ public class BookController {
             e.printStackTrace();
             jsonMap.put("success", false);
         }
-        return JsonUtil.toStr(jsonMap);
+        WebUtil.out(response,new ObjectMapper().writeValueAsString(jsonMap));
 
     }
 
@@ -130,19 +137,22 @@ public class BookController {
 
     //查询所有的图书类别
     //TODO 4从这里请求数据，请求的数据将会在发送请求的页面进行展示，跳转到进行展示的页面，正常展示只不过这个展示的过程都在一个之前发出请求的页面中
-    @RequestMapping("bookCategoryList.do")
-    public ModelAndView bookCategoryList(BookCategoryPage page) {
+    @RequestMapping("/books/category/list.htm")
+    public ModelAndView bookCategoryList(BookCategoryPage page,Integer pageIndex) {
         ModelAndView mv = new ModelAndView();
+        page.setPageNo(pageIndex);
         if (page.getPageNo() == null) {
             page.setPageNo(1);
         }
         if (page.getPageSize() == null || page.getPageSize() <= 0) {
-            page.setPageSize(6);
+            page.setPageSize(GlobalConst.PAGESIZE);
         }
         List<BookCategory> bookCategoryList = bookService.queryBookCategory(page);
+        PageNavigate pageNavigate = new PageNavigate(pubConfig.getDynamicServer()+"/book/books/category/list.htm", page.getPageNo(), page.getBookCategorys());// 定义分页对象
+        mv.addObject("pageNavigate", pageNavigate);// 设置分页的变量
         mv.addObject("page", page);
-        mv.addObject("bookCategoryList", bookCategoryList);
-        mv.setViewName("forward:/bookManage/bookCategory/book_category_list.jsp");
+        mv.addObject("list", bookCategoryList);
+        mv.setViewName("/book/bookcategory/list");
         return mv;
     }
 
@@ -152,6 +162,7 @@ public class BookController {
     @RequestMapping("/books/toAdd.htm")
     public String insertIndex(HttpServletRequest request, Model model) {
         request.setAttribute("backUrl", pubConfig.getDynamicServer() + "/book/books/toAdd.htm");
+        model.addAttribute("addFlag",1);
         List<BookCategory> bookCategoryList = bookService.queryBookCategoryAll();
         model.addAttribute("bookCategoryList", bookCategoryList);
         return "book/books/add";
@@ -191,72 +202,101 @@ public class BookController {
 
     /**
      * 图书首页
+     *
      * @param model
      * @return
      */
     @RequestMapping("/books/list.htm")
     public String list(Model model) {
         List<BookCategory> bookCategoryList = bookService.queryBookCategoryAll();
-        model.addAttribute("bookCategoryList", bookCategoryList);
+        model.addAttribute("bookCategorys", bookCategoryList);
         return "book/books/list";
     }
 
     /**
-     * @param book
+     * @param
      * @return
      * @功能描述 跳转页面
      */
-    @RequestMapping("getByPage.do")
-    @ResponseBody
-    public Object getByPage(BookCond cond) {
-        Map<String, Object> jsonMap = new HashMap<>();
-        jsonMap.put("dataList", bookService.getByPage(cond));
-        jsonMap.put("total", cond.getTotal());
-        return jsonMap;
+    @RequestMapping("/books/getByPage.htm")
+    public ModelAndView getByPage(BookCond cond, Integer pageIndex) {
+        if (cond.getPageSize() == null) {
+            cond.setPageSize(GlobalConst.PAGESIZE);
+        }
+        cond.setPageNo(pageIndex);
+        if (cond.getPageNo() == null) {
+            cond.setPageNo(1);
+        }
+        ModelAndView mv = new ModelAndView();
+        String url = createUrl(cond);
+        List<BookInfo> list = bookService.getByPage(cond, mv);
+        mv.addObject("list", list);
+        PageNavigate pageNavigate = new PageNavigate(url, cond.getPageNo(), cond.getTotal());// 定义分页对象
+        mv.addObject("pageNavigate", pageNavigate);// 设置分页的变量
+        mv.addObject("vo", cond);
+        mv.addObject("backUrl",StringUtil.encodeUrl(url+"&pageIndex="+cond.getPageNo()));
+        mv.setViewName("/book/books/list");
+        return mv;
+    }
+
+    public String createUrl(BookCond cond) {
+        String url = pubConfig.getDynamicServer() + "/book/books/getByPage.htm?";
+        if (StringUtil.isNotNullOrEmpty(cond.getBookTitle())) {
+            url += "&bookTitle=" + cond.getBookTitle();
+        }
+        if (StringUtil.isNotNullOrEmpty(cond.getBookAuthor())) {
+            url += "&bookAuthor=" + cond.getBookAuthor();
+        }
+        if (StringUtil.isNotNullOrEmpty(cond.getBookPress())) {
+            url += "&bookPress=" + cond.getBookPress();
+        }
+        if (cond.getStartTime() != null) {
+            url += "&startTime=" + cond.getStartTime().toString();
+        }
+        if (cond.getEndTime() != null) {
+            url += "&endTime=" + cond.getEndTime().toString();
+        }
+        return url;
     }
 
     /**
-     * @param book
+     * @param
      * @return
      * @功能描述 图书下架
      */
-    @RequestMapping("delete.do")
-    @ResponseBody
-    public Object delete(String[] ids) {
-        Map<String, Object> jsonMap = new HashMap<>();
-        try {
-            bookService.delete(ids);
-            jsonMap.put("success", true);
-        } catch (Exception e) {
-            jsonMap.put("success", false);
-            e.printStackTrace();
+    @RequestMapping("/books/delete.htm")
+    public String delete(String code) {
+        int count = bookService.delete(code);
+        if(count >0 ){
+            return "forward:/success.htm?resultCode="+GlobalCode.OPERA_SUCCESS;
+        }else{
+            return "forward:/error.htm?resultCode="+GlobalCode.OPERA_FAILURE;
         }
-        return jsonMap;
     }
 
     /**
-     * @param book
+     * @param
      * @return
      * @功能描述 图书基本信息修改跳转页面
      */
-    @RequestMapping("toupdate.do")
-    public String toupdate(String id, Model model) {
+    @RequestMapping("/books/toUpdate.htm")
+    public String toupdate(String id,String backUrl, Model model) {
         BookInfo bookInfo = bookService.findById(id);
         List<BookCategory> bookCategoryList = bookService.queryBookCategoryAll();
+        model.addAttribute("updateFlag",1);
         model.addAttribute("bookCategoryList", bookCategoryList);
-        model.addAttribute("bookInfo", bookInfo);
-        return "book/update";
+        model.addAttribute("book", bookInfo);
+        model.addAttribute("backUrl",StringUtil.encodeUrl(backUrl));
+        return "book/books/add";
     }
 
     /**
-     * @param book
+     * @param
      * @return
      * @功能描述 供借书登记使用的类别查看, 二级联动
      */
-    @RequestMapping("showCategory.do")
-    @ResponseBody
-    public Object showCategory() {
-        Map<String, Object> jsonMap = new HashMap<>();
+    @RequestMapping("/books/showCategory.htm")
+    public void showCategory(HttpServletResponse response) {
         List<BookCategory> list = bookService.queryBookCategoryAll();
         List<BookCategory> bookCategoryList = new ArrayList<BookCategory>();
         for (BookCategory bookCategory : list) {
@@ -264,22 +304,19 @@ public class BookController {
                 bookCategoryList.add(bookCategory);
             }
         }
-        jsonMap.put("bookCategoryList", bookCategoryList);
-        return jsonMap;
+        WebUtil.out(response,JsonUtil.toStr(bookCategoryList));
     }
 
+
     /**
-     * @param book
+     * @param
      * @return
      * @功能描述 供借书登记使用的位置查看, 二级联动
      */
-    @RequestMapping("getSeatById.do")
-    @ResponseBody
-    public Object getSeatById(String categoryId) {
-        Map<String, Object> jsonMap = new HashMap<>();
+    @RequestMapping("/books/getSeatById.htm")
+    public void getSeatById(HttpServletResponse response,String categoryId) {
         List<BookSeat> bookSeat = bookService.getSeatById(categoryId);
-        jsonMap.put("bookSeatList", bookSeat);
-        return jsonMap;
+        WebUtil.out(response,JsonUtil.toStr(bookSeat));
     }
 
     /**
@@ -287,38 +324,33 @@ public class BookController {
      * @return
      * @功能描述 图书基本信息修改跳转页面
      */
-    @RequestMapping("update.do")
-    @ResponseBody
-    public Object update(BookInfo book) {
+    @RequestMapping("/books/update.htm")
+    public String update(BookInfo book) {
         Map<String, Object> jsonMap = new HashMap<>();
         try {
             bookService.update(book);
-            jsonMap.put("success", true);
+            return "forward:/success.htm?resultCode="+GlobalCode.OPERA_SUCCESS;
         } catch (Exception e) {
-            jsonMap.put("success", false);
             e.printStackTrace();
+            return "forward:/error.htm?resultCode="+GlobalCode.OPERA_FAILURE;
         }
-        return jsonMap;
     }
 
     /**
      * @功能描述 显示详情页面跳转
      */
-    @RequestMapping("detail.do")
-    public String detail(String id, Model model) {
+    @RequestMapping("/books/detail.htm")
+    public void detail(String id, HttpServletResponse response) {
         BookInfo bookInfo = bookService.detail(id);
-        model.addAttribute("book", bookInfo);
-        return "book/detail";
+        WebUtil.out(response,JsonUtil.toStr(bookInfo));
     }
 
     /**
      * @功能描述 根据图书位置获取图书信息
      */
-    @RequestMapping("queryBookBySeat.do")
-    @ResponseBody
-    public Object queryBookBySeat(String seat) {
-        Map<String, Object> jsonMap = new HashMap<>();
-        jsonMap.put("bookInfo", bookService.queryBookBySeat(seat));
-        return jsonMap;
+    @RequestMapping("/books/queryBookBySeat.htm")
+    public void queryBookBySeat(String seat,HttpServletResponse response) {
+        BookInfo bookInfo =  bookService.queryBookBySeat(seat);
+        WebUtil.out(response,JsonUtil.toStr(bookInfo));
     }
 }

@@ -77,15 +77,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">姓名拼音：</label>
-                                <div class="col-md-9">
-                                    <input id="pinyin" type="text" name="pinyin"
-                                           style="border: hidden;background: none" readonly
-                                           class="form-control input-inline input-medium"
-                                           placeholder="" value="${sysUser.pinyin}">
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-md-3 control-label">性别：</label>
                                 <div class="col-md-9 ">
                                     <input id="gender" type="text" name="gender"
@@ -106,16 +97,6 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-md-3 control-label">部门：</label>
-                                <div class="col-md-9">
-
-                                    <input id="departmentName" type="text" name="departmentName"
-                                           class="form-control input-inline input-medium "
-                                           placeholder="" value="${sysUser.departmentName}"
-                                           style="border: hidden;background: none" readonly>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-md-3 control-label">角色：</label>
                                 <div class="col-md-9">
                                     <input id="roleName" type="text" name="roleName"
@@ -126,151 +107,72 @@
                             </div>
                         </div>
 
-                        <div class="profile-sidebar col-md-3">
-                            <!-- PORTLET MAIN -->
-                            <div class="portlet light profile-sidebar-portlet  bg-inverse"
-                                 style="width:70%;height:60%;margin:0 auto">
-                                <!-- SIDEBAR USERPIC -->
-                                <div lass="" style="width:70%;height:60%;margin:0 auto">
-                                    <img id="imgAvatar" src="${imageServer}${sysUser.avatar}"
-                                         class="img-responsive"   onerror="this.onerror=null;this.src =
-                                            '${imageServer}/sys/user/avatar/male.jpg'" alt="">
-                                </div>
-                                <!-- END SIDEBAR USERPIC -->
-                                <br/>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
 
                 <div class="tab-pane fade active in" id="tab_1_2">
-                <input type="hidden" name="backUrl" value="${backUrl }"/>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">邮箱：</label>
-                        <div class="col-md-8">
+                    <input type="hidden" name="backUrl" value="${backUrl }"/>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label">邮箱：</label>
+                            <div class="col-md-8">
 
-                            <input id="email" type="text" name="email" style="border: hidden;background: none"
-                                   readonly
-                                   class="form-control input-inline " style="width:90%"
-                                   placeholder="无" value="${sysUser.email}"><label
-                                id="emailTip"></label>
+                                <input id="email" type="text" name="email" style="border: hidden;background: none"
+                                       readonly
+                                       class="form-control input-inline " style="width:90%"
+                                       placeholder="无" value="${sysUser.email}"><label
+                                    id="emailTip"></label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label">身份证号：</label>
+                            <div class="col-md-8">
+                                <input id="idcard" type="text" name="idcard"
+                                       class="form-control input-inline "
+                                       placeholder="无" value="${sysUser.idcard}"
+                                       style="border: hidden;background: none" readonly>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">职务：</label>
-                        <div class="col-md-8 ">
-                            <input id="jobTitle" type="text" name="jobTitle"
-                                   class="form-control input-inline input-medium "
-                                   placeholder="无" value="${sysUser.jobTitle}"
-                                   style="border: hidden;background: none" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">职称：</label>
-                        <div class="col-md-8">
-                            <input id="post" type="text" name="post"
-                                   class="form-control input-inline input-medium "
-                                   placeholder="无" value="${sysUser.post}"
-                                   style="border: hidden;background: none" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">身份证号：</label>
-                        <div class="col-md-8">
-                            <input id="idcard" type="text" name="idcard"
-                                   class="form-control input-inline "
-                                   placeholder="无" value="${sysUser.idcard}"
-                                   style="border: hidden;background: none" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">政治面貌：</label>
-                        <div class="col-md-8">
-
-                            <input id="political" type="text" name="political"
-                                   class="form-control input-inline input-medium "
-                                   placeholder="无" value="${sysUser.political}"
-                                   style="border: hidden;background: none" readonly>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">民族：</label>
-                        <div class="col-md-8">
-
-                            <input id="nation" type="text" name="nation"
-                                   class="form-control input-inline input-medium "
-                                   placeholder="无" value="${sysUser.nation}"
-                                   style="border: hidden;background: none" readonly>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">教育程度：</label>
-                        <div class="col-md-8">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label">教育程度：</label>
+                            <div class="col-md-8">
 
 
-                            <input id="education" type="text" name="education"
-                                   class="form-control input-inline input-medium "
-                                   placeholder="无" value="${sysUser.education}"
-                                   style="border: hidden;background: none" readonly>
+                                <input id="education" type="text" name="education"
+                                       class="form-control input-inline input-medium "
+                                       placeholder="无" value="${sysUser.education}"
+                                       style="border: hidden;background: none" readonly>
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label">民族：</label>
+                            <div class="col-md-8">
 
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">毕业院校：</label>
-                        <div class="col-md-8">
-                            <input id="graduatedSchool" type="text" name="graduatedSchool"
-                                   class="form-control input-inline "
-                                   placeholder="无" value="${sysUser.graduatedSchool}"
-                                   style="border: hidden;background: none" readonly/><label
-                                id="graduatedSchoolTip"></label>
+                                <input id="nation" type="text" name="nation"
+                                       class="form-control input-inline input-medium "
+                                       placeholder="无" value="${sysUser.nation}"
+                                       style="border: hidden;background: none" readonly>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">座机：</label>
-                        <div class="col-md-8">
-                            <input id="telephone" type="text" name="telephone"
-                                   class="form-control input-inline "
-                                   placeholder="无" value="${sysUser.telephone}"
-                                   style="border: hidden;background: none" readonly>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="col-md-4 control-label">排序：</label>
+                            <div class="col-md-8">
+                                <input id="displayOrder" type="text" name="displayOrder"
+                                       class="form-control input-inline "
+                                       placeholder="无" value="${sysUser.displayOrder}"
+                                       style="border: hidden;background: none" readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">专业：</label>
-                        <div class="col-md-8">
-                            <input id="major" type="text" name="major"
-                                   class="form-control input-inline "
-                                   placeholder="无" value="${sysUser.major}"
-                                   style="border: hidden;background: none" readonly><label
-                                id="majorTip"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="col-md-4 control-label">排序：</label>
-                        <div class="col-md-8">
-                            <input id="displayOrder" type="text" name="displayOrder"
-                                   class="form-control input-inline "
-                                   placeholder="无" value="${sysUser.displayOrder}"
-                                   style="border: hidden;background: none" readonly>
-                        </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <div style="text-align:left;">
             <button type="button" class="btn btn-primary" id="btnLoginHis"
                     onclick="viewLoginHis('${sysUser.id}','${sysUser.username}')">登录记录
@@ -282,7 +184,7 @@
                     class="fa fa-undo"/></i> 返回
             </button>
         </div>
-</form>
+    </form>
 
 </div>
 <div class="modal fade" id="dialog-viewOperHis" tabindex="-1"
@@ -372,7 +274,7 @@
                 }
 
             }
-init();
+            init();
         });
         function init() {
             $("#tab_1_1").addClass("active in");

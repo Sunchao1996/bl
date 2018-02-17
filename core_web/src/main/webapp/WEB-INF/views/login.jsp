@@ -415,7 +415,7 @@
         };
         return {
             init: function () {
-                r(), $(".login-bg").backstretch(["${staticServer}/assets/common/images/home1.jpg"], {
+                r(), $(".login-bg").backstretch(["${staticServer}/assets/common/images/home1.jpg","${staticServer}/assets/common/images/home2.jpg"], {
                     fade: 1e3,
                     duration: 2000
                 }), $(".forget-form").hide()

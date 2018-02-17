@@ -38,10 +38,10 @@
                         <i class="fa fa-angle-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
-                        <li>
+                        <%--<li>
                             <a href="${dynamicServer}/sys/user/view.htm">
                                 <i class="icon-user"></i> 个人信息 </a>
-                        </li>
+                        </li>--%>
                         <li>
                             <a href="${dynamicServer}/sys/user/toUpdatePass.htm">
                                 <i class="icon-calendar"></i> 修改密码 </a>

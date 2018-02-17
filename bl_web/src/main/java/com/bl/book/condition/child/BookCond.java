@@ -1,84 +1,98 @@
 package com.bl.book.condition.child;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.bl.book.condition.BaseCondition;
+
 /**
- * @功能描述 图书查询的条件实体类
  * @author chao
- *
- */			
+ * @功能描述 图书查询的条件实体类
+ */
 public class BookCond extends BaseCondition {
-	private String bookBarCode;//图书主键条形码           
-	private String	bookTitle;     //图书的标题, 
-	private String bookAuthor;     //图书的作者, 
-	private String bookPress;      //图书的出版社,
-	private String	bookCategoryId;//图书的类别码,
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date startTime;
-	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date endTime;//出版时间范围
+    private String bookBarCode;//图书主键条形码
+    private String bookTitle;     //图书的标题,
+    private String bookAuthor;     //图书的作者,
+    private String bookPress;      //图书的出版社,
+    private String bookCategoryId;//图书的类别码,
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date startTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date endTime;//出版时间范围
 
-	
-	
-	public Date getStartTime() {
-		return startTime;
-	}
 
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
+    public Date getStartTime() {
+        return startTime;
+    }
 
-	public Date getEndTime() {
-		return endTime;
-	}
+    public String getStartTimeStr() {
+        if (startTime != null) {
+            return new SimpleDateFormat("yyyy-MM-dd").format(startTime);
+        } else {
+            return "";
+        }
+    }
+    public String getEndTimeStr() {
+        if (endTime != null) {
+            return new SimpleDateFormat("yyyy-MM-dd").format(endTime);
+        } else {
+            return "";
+        }
+    }
 
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
 
-	public String getBookBarCode() {
-		return bookBarCode;
-	}
+    public Date getEndTime() {
+        return endTime;
+    }
 
-	public void setBookBarCode(String bookBarCode) {
-		this.bookBarCode = bookBarCode;
-	}
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
 
-	
+    public String getBookBarCode() {
+        return bookBarCode;
+    }
 
-	public String getBookTitle() {
-		return bookTitle;
-	}
+    public void setBookBarCode(String bookBarCode) {
+        this.bookBarCode = bookBarCode;
+    }
 
-	public void setBookTitle(String bookTitle) {
-		this.bookTitle = bookTitle;
-	}
 
-	public String getBookAuthor() {
-		return bookAuthor;
-	}
+    public String getBookTitle() {
+        return bookTitle;
+    }
 
-	public void setBookAuthor(String bookAuthor) {
-		this.bookAuthor = bookAuthor;
-	}
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
 
-	public String getBookPress() {
-		return bookPress;
-	}
+    public String getBookAuthor() {
+        return bookAuthor;
+    }
 
-	public void setBookPress(String bookPress) {
-		this.bookPress = bookPress;
-	}
+    public void setBookAuthor(String bookAuthor) {
+        this.bookAuthor = bookAuthor;
+    }
 
-	public String getBookCategoryId() {
-		return bookCategoryId;
-	}
+    public String getBookPress() {
+        return bookPress;
+    }
 
-	public void setBookCategoryId(String bookCategoryId) {
-		this.bookCategoryId = bookCategoryId;
-	}
-	
+    public void setBookPress(String bookPress) {
+        this.bookPress = bookPress;
+    }
+
+    public String getBookCategoryId() {
+        return bookCategoryId;
+    }
+
+    public void setBookCategoryId(String bookCategoryId) {
+        this.bookCategoryId = bookCategoryId;
+    }
+
 }

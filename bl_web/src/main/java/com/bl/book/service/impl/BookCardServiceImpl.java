@@ -64,8 +64,7 @@ public class BookCardServiceImpl implements BookCardService{
 	}
 
 	@Override
-	public void delete(String[] ids) {
-		for (String id : ids) {
+	public void delete(String id) {
 			BookCard bookCard = dao.findById(id);
 			bookCard.setEndTime(new Date());
 			dao.delete(bookCard);
@@ -79,8 +78,7 @@ public class BookCardServiceImpl implements BookCardService{
 			reader.setReaderStatusId(0);
 			readerDao.updateStatus(reader);
 			
-		}
-		
+
 	}
 
 	@Override

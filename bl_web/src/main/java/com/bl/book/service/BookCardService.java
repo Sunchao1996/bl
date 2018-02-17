@@ -23,7 +23,7 @@ public interface BookCardService {
 	/**
 	 * @功能描述 禁用图书卡
 	 */
-	public void delete(String[] ids);
+	public void delete(String ids);
 	/**
 	 * @功能描述 读者挂失图书卡
 	 */

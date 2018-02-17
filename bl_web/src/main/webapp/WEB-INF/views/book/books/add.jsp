@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../../common/taglib.jsp" %>
 
@@ -32,8 +33,10 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="fa fa-book"></i>
-                    <span class="caption-subject font-dark sbold uppercase">添加图书(带<span
-                            class="star">*</span>为必填项)</span>
+                    <span class="caption-subject font-dark sbold uppercase">
+                        <c:if test="${addFlag == 1}">添加图书(带<span class="star">*</span>为必填项)</c:if>
+                        <c:if test="${updateFlag == 1}">修改图书(带<span class="star">*</span>为必填项)</c:if>
+                    </span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -47,7 +50,7 @@
                             <div class="col-md-3">
                                 <select id="bookCategoryId" name="bookCategoryId" class="form-control input-circle">
                                     <c:forEach items="${bookCategoryList }" var="obj">
-                                        <option value="${obj.bookCategoryId }">${obj.bookCategory }</option>
+                                        <option value="${obj.bookCategoryId }" ${obj.bookCategoryId == book.bookCategoryId?'selected':'' }>${obj.bookCategory }</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -62,8 +65,9 @@
                                                                                aria-required="true"> * </span></label>
                             <div class="col-md-3">
                                 <input placeholder="请输入13个字符"
-                                        type="text" id="bookBarCode" name="bookBarCode"
-                                        class="form-control input-circle"/>
+                                       type="text" id="bookBarCode" name="bookBarCode"
+                                       class="form-control input-circle"
+                                       value="${book.bookBarCode}" ${updateFlag == 1 ?'readonly':''}  />
 
                             </div>
                             <div class="col-md-6">
@@ -76,8 +80,9 @@
                         <div class="form-group">
                             <label class="col-md-3 control-label">图书的ISBN码：<span class="required" aria-required="true"> * </span></label>
                             <div class="col-md-3">
-                                <input class="form-control input-circle"  placeholder="请输入13个字符"
-                                       type="text" id="bookISBN" name="bookISBN"/>
+                                <input class="form-control input-circle" placeholder="请输入13个字符"
+                                       type="text" id="bookISBN" name="bookISBN"
+                                       value="${book.bookISBN}" ${updateFlag== 1?'readonly':''} />
                             </div>
                             <div class="col-md-6"><label
                                     id="bookISBNTip"></label>
@@ -90,7 +95,7 @@
                                                                               aria-required="true"> * </span></label>
                             <div class="col-md-3">
                                 <input class="form-control input-circle"
-                                       type="text" id="bookTitle" name="bookTitle"/>
+                                       type="text" id="bookTitle" name="bookTitle" value="${book.bookTitle}"/>
                             </div>
                             <div class="col-md-6"><label
                                     id="bookTitleTip"></label></div>
@@ -102,7 +107,7 @@
                                                                               aria-required="true"> * </span></label>
                             <div class="col-md-3">
                                 <input class="form-control input-circle"
-                                       type="text" id="bookAuthor" name="bookAuthor"/>
+                                       type="text" id="bookAuthor" name="bookAuthor" value="${book.bookAuthor}"/>
                             </div>
                             <div class="col-md-6"><label
                                     id="bookAuthorTip"></label></div>
@@ -114,7 +119,7 @@
                                                                                aria-required="true"> * </span></label>
                             <div class="col-md-3">
                                 <input class="form-control input-circle"
-                                       type="text" id="bookPress" name="bookPress"/>
+                                       type="text" id="bookPress" name="bookPress" value="${book.bookPress}"/>
                             </div>
                             <div class="col-md-6"><label
                                     id="bookPressTip"></label></div>
@@ -125,7 +130,8 @@
                             <label class="col-md-3 control-label">图书的出版时间：<span class="required"
                                                                                 aria-required="true"> * </span></label>
                             <div class="col-md-3">
-                                <input id="bookPublish" name="bookPublish" type="text" class="form-control input-circle" readonly />
+                                <input value="<fn:formatDate value="${book.bookPublish}" pattern="yyyy-MM-dd"/>" id="bookPublish" name="bookPublish" type="text"
+                                       class="form-control input-circle" readonly/>
                             </div>
                             <div class="col-md-6"><label
                                     id="bookPublishTip"></label></div>
@@ -137,10 +143,10 @@
                                                                                 aria-required="true"> * </span></label>
                             <div class="col-md-3">
                                 <input class="form-control input-circle"
-                                       type="text" id="bookPrintCount" name="bookPrintCount"/>
+                                       type="text" id="bookPrintCount" name="bookPrintCount"
+                                       value="${book.bookPrintCount}"/>
                             </div>
-                            <div class="col-md-6"><label
-                                    id="bookPrintCountTip"></label></div>
+                            <div class="col-md-6"><label id="bookPrintCountTip"></label></div>
                         </div>
                     </div>
                     <div class="form-body">
@@ -148,7 +154,7 @@
                             <label class="col-md-3 control-label">图书的价格：<span class="required"
                                                                               aria-required="true"> * </span></label>
                             <div class="col-md-3">
-                                <input class="form-control input-circle"
+                                <input value="${book.bookPrice}" class="form-control input-circle"
                                        type="text" id="bookPrice" name="bookPrice"/>
 
                             </div>
@@ -161,7 +167,8 @@
                             <label class="col-md-3 control-label">图书的备注：</label>
                             <div class="col-md-3">
                         <textarea class="form-control input-circle"
-                                  cols="10" rows="7" id="bookComment" name="bookComment"></textarea><label
+                                  cols="10" rows="7" id="bookComment"
+                                  name="bookComment">${book.bookComment}</textarea><label
                                     id="bookCommentTip"></label>
                             </div>
                         </div>
@@ -170,6 +177,11 @@
                         <div class="row">
                             <div class="col-md-offset-3 col-md-9">
                                 <button type="submit" class="btn green">提交</button>
+                                <c:if test="${updateFlag == 1}" >
+                                    <button type="button" class="btn default" onclick="history.back(-1)"><i
+                                            class="fa fa-undo"/></i>  取消
+                                    </button>
+                                </c:if>
                             </div>
                         </div>
                     </div>
@@ -206,6 +218,9 @@
 </body>
 <bl-script>
     <script type="text/javascript">
+        if ("${updateFlag}" == 1) {
+            $("#bookForm").attr("action", "${dynamicServer}/book/books/update.htm");
+        }
         $('#bookPublish').datetimepicker({
             lang: 'ch',
             timepicker: false,
@@ -216,7 +231,7 @@
             var regex = /^\d+$/;
             return this.optional(element) || regex.test(value);
         }, "请正确格式的全数字字符串");
-        $(function(){
+        $(function () {
             $("#bookForm").validate({
                 errorElement: "label",
                 errorClass: "valiError",
@@ -228,65 +243,65 @@
                         required: true,
                         minlength: 13,
                         maxlength: 13,
-                        isNumber:true
+                        isNumber: true
                     },
                     bookISBN: {
                         required: true,
                         minlength: 13,
                         maxlength: 13,
-                        isNumber:true
+                        isNumber: true
                     },
                     bookPrintCount: {
                         required: true,
-                        isNumber:true
+                        isNumber: true
                     },
-                    bookTitle:{
-                        required:true
+                    bookTitle: {
+                        required: true
                     },
-                    bookAuthor:{
-                        required:true
+                    bookAuthor: {
+                        required: true
                     },
-                    bookPress:{
-                        required:true
+                    bookPress: {
+                        required: true
                     },
-                    bookPublish:{
-                        required:true
+                    bookPublish: {
+                        required: true
                     },
-                    bookPublish:{
-                        required:true
+                    bookPublish: {
+                        required: true
                     }
                 },
                 messages: {
                     bookBarCode: {
                         required: "这是必填字段",
-                        maxlength: $.validator.format( "最多 {0} 字符." ),
-                        minlength: $.validator.format( "最少 {0} 字符." ),
-                        isNumber:"必须全为数字"
+                        maxlength: $.validator.format("最多 {0} 字符."),
+                        minlength: $.validator.format("最少 {0} 字符."),
+                        isNumber: "必须全为数字"
                     },
                     bookISBN: {
                         required: "这是必填字段",
-                        maxlength: $.validator.format( "最多 {0} 字符." ),
-                        minlength: $.validator.format( "最少 {0} 字符." ),
-                        isNumber:true
+                        maxlength: $.validator.format("最多 {0} 字符."),
+                        minlength: $.validator.format("最少 {0} 字符."),
+                        isNumber: true
                     },
                     bookPrintCount: {
                         required: "这是必填字段",
-                        isNumber:"必须全为数字"
+                        isNumber: "必须全为数字"
                     },
-                    bookTitle:{
-                        required:"这是必填字段"
+                    bookTitle: {
+                        required: "这是必填字段"
                     },
-                    bookAuthor:{
-                        required:"这是必填字段"
+                    bookAuthor: {
+                        required: "这是必填字段"
                     },
-                    bookPress:{
-                        required:"这是必填字段"
+                    bookPress: {
+                        required: "这是必填字段"
                     },
-                    bookPublish:{
-                        required:"这是必填字段"
+                    bookPublish: {
+                        required: "这是必填字段"
                     },
-                    bookPublish:{
-                        required:"这是必填字段"
+                    bookPublish: {
+                        required: "这是必填字段"
                     }
                 },
                 submitHandler: function (form) {

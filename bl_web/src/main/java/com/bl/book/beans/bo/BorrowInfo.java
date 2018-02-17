@@ -23,14 +23,28 @@ public class BorrowInfo {
 	private Integer borrowStatus;//记录的状态        0表示未还           1表示已还
 	private String bookSeat;//图书的位置
 	private String bookBarCode;//图书的条形码
-	
+
 	//辅助字段
 	private String bookISBN;//图书ISBN
 	private String bookTitle;//图书标题
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");//日期格式化
 	private Double bookPrice;//图书标题
-	
-	
+
+	//获取逾期价格
+	public String getPriceMore(){
+		if(returnTime == null){
+			return "0";
+		}
+		int flag = returnTime.compareTo(backTime);
+		if(flag>0){
+			return bookPrice.toString();
+		}else{
+			return "0";
+		}
+	}
+	public String getDateNow(){
+		return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	}
 	public Double getBookPrice() {
 		return bookPrice;
 	}

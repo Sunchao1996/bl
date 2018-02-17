@@ -11,6 +11,7 @@ import com.bl.book.beans.bo.BookInfo;
 import com.bl.book.beans.bo.BookSeat;
 import com.bl.book.beans.vo.BookCategoryPage;
 import com.bl.book.condition.child.BookCond;
+import org.springframework.web.servlet.ModelAndView;
 
 public interface BookService {
 
@@ -34,11 +35,11 @@ public interface BookService {
 	/**
 	 *@功能描述 分页查询
 	 */
-	List<BookInfo> getByPage(BookCond cond);
+	List<BookInfo> getByPage(BookCond cond, ModelAndView modelAndView);
 	/**
 	 *@功能描述 图书下架
 	 */
-	void delete(String[] ids);
+	int delete(String id);
 	/**
 	 *@功能描述 根据id查询图书基本信息
 	 */
@@ -64,5 +65,7 @@ public interface BookService {
 	 * @功能描述 根据图书位置获取图书信息
 	 */
 	BookInfo queryBookBySeat(String seat);
+
+	int countBookInfo(BookCond cond);
 
 }

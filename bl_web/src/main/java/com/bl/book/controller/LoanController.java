@@ -1,10 +1,13 @@
 package com.bl.book.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.bl.util.web.WebUtil;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,21 +15,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bl.book.service.LoanService;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @功能描述 借书登记处理器
  * @author chao
  *
  */
 @Controller
-@RequestMapping("loan")
+@RequestMapping("book")
 public class LoanController {
 	@Autowired
 	private LoanService service;//注入登记service
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	@RequestMapping("index.do")
+	@RequestMapping("/bookloan/index.htm")
 	public String index(){
-		return "borrow/loan/index";
+		return "book/loan/index";
 	}
 	@RequestMapping("list.do")
 	public String list(){
@@ -35,9 +40,8 @@ public class LoanController {
 	/**
 	 * @功能描述 对借书记录进行添加
 	 */
-	@RequestMapping("register.do")
-	@ResponseBody
-	public Object register(String[] ids){
+	@RequestMapping("/bookloan/register.htm")
+	public void register(HttpServletResponse response, String[] ids) throws IOException {
 		Map<String,Object> jsonMap = new HashMap<String,Object>();
 		Date date = new Date();
 		Long time = date.getTime();
@@ -53,6 +57,6 @@ public class LoanController {
 		}else{
 			jsonMap.put("success", false);
 		}
-		return jsonMap;
+		WebUtil.out(response,new ObjectMapper().writeValueAsString(jsonMap));
 	}
 }

@@ -15,7 +15,7 @@ public class BookCardCond extends BaseCondition{
 	private String startTime;
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private String endTime;
-	private Integer cardStatusId;
+	private Integer cardStatusId=-1;
 	public String getBookCardId() {
 		return bookCardId;
 	}

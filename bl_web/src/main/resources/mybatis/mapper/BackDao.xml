@@ -9,29 +9,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="readerId != null and readerId != ''">
 				and readerId =#{readerId}
 			</if>
-			<if test="startBorrowTime != null">
-				and #{startBorrowTime} >= borrowTime 
-			</if>
 			<if test="endBorrowTime != null">
-				and  borrowTime >= #{endBorrowTime} 
+				and #{endBorrowTime} >= borrowTime
 			</if>
-			<if test="startBackTime != null">
-				and #{startBackTime} >= backTime 
+			<if test=" startBorrowTime != null">
+				and  borrowTime >= #{startBorrowTime}
 			</if>
 			<if test="endBackTime != null">
-				 and backTime >= #{endBackTime} 
+				and #{endBackTime} >= backTime
 			</if>
-			<if test="startReturnTime != null">
-				and #{startReturnTime} >= returnTime 
+			<if test="  startBackTime!= null">
+				 and backTime >= #{startBackTime}
 			</if>
 			<if test="endReturnTime != null">
-				 and returnTime >= #{endReturnTime} 
+				and #{endReturnTime} >= returnTime
+			</if>
+			<if test=" startReturnTime != null">
+				 and returnTime >= #{startReturnTime}
 			</if>
 			<if test="borrowStatus != -1">
 				and borrowStatus =#{borrowStatus}
 			</if>
-			<if test="bookSeat != null and bookSeat != ''">
-				and bookSeat like #{bookSeat} '%'
+			<if test="bookCategoryId != null and bookCategoryId != ''">
+				and bookSeat like #{bookCategoryId} '%'
 			</if>
 			<if test="bookBarCode != null and bookBarCode != ''">
 				and bookBarCode =#{bookBarCode}

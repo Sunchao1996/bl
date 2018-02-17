@@ -19,9 +19,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				and regTime >= #{startTime}
 			</if>
 			<if test="endTime != null and endTime != ''">
-				and #{endTime} >= regTime  
+				and #{endTime} >= regTime
 			</if>
-			<if test="cardStatusId != 0">
+			<if test="cardStatusId != -1">
 				and cardStatusId = #{cardStatusId}
 			</if>
 			and bookCardId in (select bookCardId from book_readers)
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="endTime != null and endTime != ''">
 				and #{endTime} >= regTime  
 			</if>
-			<if test="cardStatusId != 0">
+			<if test="cardStatusId != -1">
 				and cardStatusId = #{cardStatusId}
 			</if>
 			and bookCardId in (select bookCardId from book_readers)

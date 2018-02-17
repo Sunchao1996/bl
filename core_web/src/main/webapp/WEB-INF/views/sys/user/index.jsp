@@ -76,12 +76,12 @@
                     </button>
                 </c:if>
 
-                <button class="btn btn-file" id="importUser">
-                    <i class="fa fa-cloud-upload"></i> 导入
-                </button>
-                <button class="btn btn-file" id="outportUser">
-                    <i class="fa fa-cloud-download"></i> 导出
-                </button>
+                <%--<button class="btn btn-file" id="importUser">--%>
+                    <%--<i class="fa fa-cloud-upload"></i> 导入--%>
+                <%--</button>--%>
+                <%--<button class="btn btn-file" id="outportUser">--%>
+                    <%--<i class="fa fa-cloud-download"></i> 导出--%>
+                <%--</button>--%>
             </div>
         </div>
 

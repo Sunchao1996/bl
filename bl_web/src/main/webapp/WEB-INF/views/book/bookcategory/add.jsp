@@ -128,6 +128,7 @@
                 //必须false才会避开jQuery对 formdata 的默认处理 XMLHttpRequest会对 formdata 进行正确的处理
                 processData: false,
                 success: function (data) {
+                    console.log(data);
                     if (!data.success) {
                         bootbox.alert({
                             buttons: {

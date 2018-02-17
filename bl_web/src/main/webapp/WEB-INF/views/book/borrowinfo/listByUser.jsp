@@ -1,0 +1,113 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="../../common/taglib.jsp" %>
+
+
+<head>
+    <title>借阅信息</title>
+</head>
+
+<body>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li><i class="fa fa-home"></i> <a
+                href="${dynamicServer}/index.htm">首页</a></li>
+        <li>>图书借阅</li>
+        <li>>综合查询</li>
+    </ul>
+</div>
+<div class="portlet box green">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-comments"></i>查询条件
+        </div>
+    </div>
+    <div class="portlet-body">
+        <table class="searchTable">
+            <tr>
+                <input id="backUrl" type="hidden" value="${backUrl}"/>
+                <td nowrap="nowrap">卡号：</td>
+                <td>
+                    <input type="text" id="readerId" class="form-control input-small" value="${vo.readerId}">
+                </td>
+            </tr>
+            <tr>
+                <td nowrap="nowrap">状态：</td>
+                <td><input type="checkbox" class="" id="status1" name="status" value="1" ${vo.borrowStatus==-1 || vo.borrowStatus == 1?'checked':''}>已还
+                    <input type="checkbox" class="" id="status2" name="status" value="0"  ${vo.borrowStatus==-1 || vo.borrowStatus == 0?'checked':''}>未还
+                </td>
+                <td></td>
+                <td>
+                    <button class="btn btn-primary" id="btnSearch">
+                        <i class="ace-icon fa fa-search"></i> 查询
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="row" style="overflow: auto">
+    <div class="col-md-12">
+        <table class="table  table-striped table-bordered table-hover ">
+            <thead>
+                <tr>
+                    <th width="7%">序号</th>
+                    <th width="12%">位置</th>
+                    <th width="11%">ISBN</th>
+                    <th width="11%">标题</th>
+                    <th width="11%">借书时间</th>
+                    <th width="11%">应还时间</th>
+                    <th width="11%">今天时间</th>
+                    <th width="11%">逾期罚款</th>
+                    <th width="11%">丢失罚款</th>
+                </tr>
+            </thead>
+            <tbody id="booksTBody">
+            <c:forEach items="${list}" var="n" varStatus="st">
+                <tr>
+                    <td>${st.index+1}</td>
+                    <td>${n.bookSeat}</td>
+                    <td>${n.bookISBN}</td>
+                    <td>${n.bookTitle}</td>
+                    <td>${n.borrowTime_text}</td>
+                    <td>${n.backTime_text}</td>
+                    <td>${n.dateNow}</td>
+                    <td>${n.priceMore}</td>
+                    <td>${n.bookPrice *2}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">${ pageNavigate.pageModel}</div>
+</div>
+</body>
+<bl-script>
+    <script type="text/javascript">
+        //拼接查询条件；
+        var searchHandler = function () {
+            var readerId = $.trim($("#readerId").val());
+            var status1 = $("#status1").prop("checked");
+            var status2 = $("#status2").prop("checked");
+            var url = "";
+            if (readerId != "") {
+                url += "&readerId=" + readerId;
+            }
+            if (status1) {
+                url += "&borrowStatus=1";
+            }
+            if(status2){
+                url += "&borrowStatus=0";
+            }
+            if(status1 && status2){
+                url += "&borrowStatus=-1";
+            }
+            window.location="${dynamicServer}/book/back/queryByPage.htm?"+url;
+        }
+        $(function () {
+            $("#btnSearch").bind("click", searchHandler);
+        });
+    </script>
+</bl-script>
