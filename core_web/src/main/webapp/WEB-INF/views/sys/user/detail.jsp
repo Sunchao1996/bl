@@ -174,12 +174,12 @@
             </div>
         </div>
         <div style="text-align:left;">
-            <button type="button" class="btn btn-primary" id="btnLoginHis"
+           <%-- <button type="button" class="btn btn-primary" id="btnLoginHis"
                     onclick="viewLoginHis('${sysUser.id}','${sysUser.username}')">登录记录
             </button>
             <button type="button" class="btn btn-primary" id="btnOperHis"
                     onclick="viewOperHis('${sysUser.id}','${sysUser.username}')">操作记录
-            </button>
+            </button>--%>
             <button type="button" class="btn default" onclick="history.back(-1)"><i
                     class="fa fa-undo"/></i> 返回
             </button>

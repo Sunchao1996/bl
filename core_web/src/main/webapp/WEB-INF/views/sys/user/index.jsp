@@ -112,12 +112,10 @@
                     <td>${sysUser.realname }</td>
                     <td>
                         <c:if test="${sysUser.gender eq '女'}">
-                            <img alt="" class="img" style="width: 20px;height: 20px"
-                                 src="${imageServer}/sys/user/avatar/f.jpg">
+                            女
                         </c:if>
                         <c:if test="${sysUser.gender eq '男'}">
-                            <img alt="" class="img" style="width: 20px;height: 20px"
-                                 src="${imageServer}/sys/user/avatar/m.jpg">
+                            男
                         </c:if>
                     </td>
                     <td>${sysUser.roleName }</td>
