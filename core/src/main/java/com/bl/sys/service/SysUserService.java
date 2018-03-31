@@ -61,12 +61,12 @@ public class SysUserService {
             String md5Pass = md5SaltUtil.encode(password);
             sysUser.setPassword(md5Pass);
             sysUser.setRandomcode(randomcode);
-             // 根据性别设置默认头像
-             if ("女".equals(sysUser.getGender())) {
-             sysUser.setAvatar("/sys/user/avatar/female.jpg");
-             } else {
-             sysUser.setAvatar("/sys/user/avatar/male.jpg");
-             }
+//             // 根据性别设置默认头像
+//             if ("女".equals(sysUser.getGender())) {
+//             sysUser.setAvatar("/sys/user/avatar/female.jpg");
+//             } else {
+//             sysUser.setAvatar("/sys/user/avatar/male.jpg");
+//             }
             // 设置姓名拼音
             sysUser.setPinyin(StringUtil.getPinYinHeadUpCase(sysUser.getRealname()));// 姓名拼音
             sysUser.setCompletion(completionCalculate(sysUser));

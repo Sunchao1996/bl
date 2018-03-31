@@ -225,14 +225,21 @@ public class SysUserController {
         sysUser.setStatus(1);
         sysUser.setCreatedBy(SessionUtil.getRealname(request));
         int flag = sysUserService.add(sysUser);
+//        int flag = 1;
         if (flag == 0)
             return "forward:/error.htm?resultCode=" + GlobalCode.OPERA_FAILURE;// 用户信息新增失败;
         else if (flag == 2)
             return "forward:/error.htm?resultCode=20104";// 用户账号已存在;
         else {
             //TODO 转发到原来的用户添加
-//            request.setAttribute("",);
-            return "forward:/book/readers/insert.htm";// 用户信息新增成功;
+            request.setAttribute("readerId",sysUser.getUsername());
+            request.setAttribute("readerName",sysUser.getRealname());
+            request.setAttribute("readerGender",sysUser.getGender());
+            request.setAttribute("readerTel",sysUser.getMobile());
+            request.setAttribute("readerCardId",sysUser.getIdcard());
+            request.setAttribute("readerStatusId",1);
+            request.setAttribute("bookCardId",sysUser.getBookCardId());
+            return "forward:/book/reader/insert.htm";// 用户信息新增成功;
         }
     }
 
