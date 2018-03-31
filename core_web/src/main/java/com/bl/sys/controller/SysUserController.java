@@ -229,8 +229,11 @@ public class SysUserController {
             return "forward:/error.htm?resultCode=" + GlobalCode.OPERA_FAILURE;// 用户信息新增失败;
         else if (flag == 2)
             return "forward:/error.htm?resultCode=20104";// 用户账号已存在;
-        else
-            return "forward:/success.htm?resultCode=" + GlobalCode.SAVE_SUCCESS;// 用户信息新增成功;
+        else {
+            //TODO 转发到原来的用户添加
+//            request.setAttribute("",);
+            return "forward:/book/readers/insert.htm";// 用户信息新增成功;
+        }
     }
 
 

@@ -46,14 +46,7 @@ public class SysUser extends BaseModel {
     private Integer displayOrder;//排序
     private String lastLoginDate;//最后登录时间
     private Integer completion;//完整度
-
-    public Integer getCompletion() {
-        return completion;
-    }
-
-    public void setCompletion(Integer completion) {
-        this.completion = completion;
-    }
+    private String bookCardId;//图书卡
 
     @Override
     public String toString() {
@@ -86,7 +79,25 @@ public class SysUser extends BaseModel {
                 ", jobTitle='" + jobTitle + '\'' +
                 ", displayOrder=" + displayOrder +
                 ", lastLoginDate='" + lastLoginDate + '\'' +
+                ", completion=" + completion +
+                ", bookCardId='" + bookCardId + '\'' +
                 '}';
+    }
+
+    public String getBookCardId() {
+        return bookCardId;
+    }
+
+    public void setBookCardId(String bookCardId) {
+        this.bookCardId = bookCardId;
+    }
+
+    public Integer getCompletion() {
+        return completion;
+    }
+
+    public void setCompletion(Integer completion) {
+        this.completion = completion;
     }
 
     public String getAvatar() {

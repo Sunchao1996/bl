@@ -59,6 +59,15 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-md-3 control-label">图书卡卡号：</label>
+                                <div class="col-md-9">
+                                    <input id="bookCardId" name="bookCardId" type="text"
+                                           class="form-control input-inline input-medium"
+                                           placeholder="" value="${sysUser.bookCardId}"> <label
+                                        id="bookCardIdTip"></label>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-md-3 control-label">真实姓名：</label>
                                 <div class="col-md-9">
                                     <input id="realname" type="text" name="realname"
@@ -111,7 +120,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="profile-sidebar col-md-3">
+                       <%-- <div class="profile-sidebar col-md-3">
                             <!-- PORTLET MAIN -->
                             <div class="portlet light profile-sidebar-portlet  bg-inverse ">
                                 <!-- SIDEBAR USERPIC -->
@@ -124,7 +133,7 @@
                                 <!-- END SIDEBAR USERPIC -->
 
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
 
                 </div>
@@ -390,6 +399,9 @@
                     },
                     major: {
                         maxlength: 10
+                    },
+                    bookCardId:{
+                        required:true
                     }
                 },
                 messages: {
