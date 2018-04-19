@@ -130,9 +130,9 @@
             var backUrl = $("#backUrl").val();
             window.location = "${dynamicServer}/book/books/delete.htm?code=" + code + "&backUrl=" + backUrl;
         }
-        var updateCode = function(code){
+        var updateCode = function (code) {
             var backUrl = $("#backUrl").val();
-            window.location = "${dynamicServer}/book/books/toUpdate.htm?id="+code+"&backUrl="+backUrl;
+            window.location = "${dynamicServer}/book/books/toUpdate.htm?id=" + code + "&backUrl=" + backUrl;
         }
         $('#startTime').datetimepicker({
             lang: 'ch',
@@ -171,7 +171,7 @@
             if (endTime != '') {
                 url += "&endTime=" + endTime;
             }
-            window.location = "${dynamicService}/book/books/getByPage.htm?version=1.1" + url;
+            window.location = "${dynamicServer}/book/books/getByPage.htm?version=1.1" + url;
 
         }
         $(function () {
