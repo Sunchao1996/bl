@@ -30,7 +30,7 @@ import com.bl.util.web.WebUtil;
 /**
  * 
  * 字典信息 Controller
- * @author: 刘正荣
+ * @author: 
  * @date: 2017年10月19日
  */
 
@@ -42,7 +42,7 @@ import com.bl.util.web.WebUtil;
  * warning: (这里描述这个类的注意事项 – 可选).<br/>
  * 
  *
- * @author 刘正荣 created on 2017年10月31日
+ * @author  created on 2017年10月31日
  */
 @Controller
 @RequestMapping("/sys/dic")
@@ -67,7 +67,7 @@ public class SysDicController {
 	 * @param request request
 	 * @return 跳转到字典信息首页
 	 *
-	 * @author 刘正荣 created on 2017年10月31日
+	 * @author  created on 2017年10月31日
 	 */
 	@RequestMapping("/index")
 	public ModelAndView index(HttpServletRequest request) {
@@ -90,7 +90,7 @@ public class SysDicController {
 	 * @param request request
 	 * @return 跳转到添加字典页面
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/toAdd")
 	public ModelAndView toAdd(HttpServletRequest request) {
@@ -108,7 +108,7 @@ public class SysDicController {
 	 * @param request request
 	 * @return 跳转到添加字典类别页面
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/toAddCategory")
 	public ModelAndView toAddCategory(HttpServletRequest request) {
@@ -127,7 +127,7 @@ public class SysDicController {
 	 * @param id 要更新的字典信息的id
 	 * @return 跳转到更新字典页面
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/toUpdate")
 	public ModelAndView toUpdate(HttpServletRequest request, int id) {
@@ -147,7 +147,7 @@ public class SysDicController {
 	 * @param id 需要修改的字典类别id
 	 * @return 跳转到修改字典类别页面
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/toUpdateCategory")
 	public ModelAndView toUpdateCategory(HttpServletRequest request, int id) {
@@ -167,7 +167,7 @@ public class SysDicController {
 	 * @param category 字典类别
 	 * @return 跳转到字典明细
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/toMaintenance")
 	public ModelAndView toMaintenance(HttpServletRequest request, String category) {
@@ -186,7 +186,7 @@ public class SysDicController {
 	 * @param sysDic 添加的字典对象
 	 * @return 0表示添加失败，1表示添加成功
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/add")
 	public String add(@Valid SysDic sysDic) {
@@ -209,7 +209,7 @@ public class SysDicController {
 	 * @param response response
 	 * @param request request
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/maintenanceSysDic")
 	@ResponseBody
@@ -233,7 +233,7 @@ public class SysDicController {
 	 * @param category 需要删除的字典类别
 	 * @return 0表示删除成功，1表示删除失败
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/delete")
 	public String delete(String category) {
@@ -255,7 +255,7 @@ public class SysDicController {
 	 * @param value category,categoryName,code,name修改后的值
 	 * @param category 字典信息的类别
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/checkDicExist")
 	public void checkDicExist(HttpServletResponse response, String param, String prev, String value, String category) {
@@ -278,7 +278,7 @@ public class SysDicController {
 	 * @param response response
 	 * @param category 字典类别
 	 *
-	 * @author 刘正荣 created on 2017年11月1日
+	 * @author  created on 2017年11月1日
 	 */
 	@RequestMapping("/checkCateoryExistDic")
 	public void checkCateoryExistDic(HttpServletResponse response, String category) {

@@ -47,10 +47,10 @@
     </bean>
     <bean id="dataSourceBook" class="com.alibaba.druid.pool.DruidDataSource"
           destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/book_manage"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="driverClassName" value="${book.driverClassName}"/>
+        <property name="url" value="${book.url}"/>
+        <property name="username" value="${book.username}"/>
+        <property name="password" value="${book.password}"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="2"/>
         <property name="minIdle" value="1"/>
@@ -76,23 +76,23 @@
     <!--ali-->
     <!-- 注册Dao对象， 使用MyBatis的动态代理对象 -->
     <!-- 注册SqlSessionFactory -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" >
-        <property name="dataSource" ref="dataSourceBook" />
-        <property name="configLocation" value="classpath:mybatis/mybatis.xml" />
-        <property name="mapperLocations" value="classpath*:mybatis/mapper/*.xml" />
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceBook"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis.xml"/>
+        <property name="mapperLocations" value="classpath*:mybatis/mapper/*.xml"/>
     </bean>
 
     <!-- 注册动态代理扫描器：Dao接口的代理对象 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 指定SqlSessionFactorty -->
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!-- 指定Dao接口的bao -->
-        <property name="basePackage" value="com.bl.book.dao" />
+        <property name="basePackage" value="com.bl.book.dao"/>
     </bean>
     <!-- 事务 AspectJ -->
     <!-- 注册事务管理器 -->
     <bean id="transactionManagerBook" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <!-- 注册事务的通知 -->
