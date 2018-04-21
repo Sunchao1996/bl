@@ -48,9 +48,9 @@
     <bean id="dataSourceBook" class="com.alibaba.druid.pool.DruidDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/book_manager"/>
+        <property name="url" value="jdbc:mysql://47.98.126.115:3306/book_manager"/>
         <property name="username" value="root"/>
-        <property name="password" value="root"/>
+        <property name="password" value="123456"/>
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="2"/>
         <property name="minIdle" value="1"/>
