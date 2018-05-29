@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bl.sys.dao.SysUserDao;
 import com.bl.util.code.GlobalCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,8 @@ public class ReadUserController {
     private ReaderService service;
     @Autowired
     private BookCardDao bookCardDao;
+    @Autowired
+    private SysUserDao sysUserDao;
 
     @RequestMapping("/insert")
     public String insert(Reader reader, HttpServletRequest request) {
@@ -49,14 +52,19 @@ public class ReadUserController {
             BookCard card = new BookCard();
             card.setBookCardId(reader.getBookCardId());
             bookCardDao.deleteT(card);
-            return "forward:/error.htm?resultCode=" + GlobalCode.OPERA_FAILURE;
+            return "forward:/error.htm?resultCode=95271";
         } else {
-            int count = service.insert(reader);
-            if (count > 0) {
-                return "forward:/success.htm?resultCode=" + GlobalCode.OPERA_SUCCESS;
-            } else {
-                return "forward:/error.htm?resultCode=" + GlobalCode.OPERA_FAILURE;
-
+            try {
+                int count = service.insert(reader);
+                if (count > 0) {
+                    return "forward:/success.htm?resultCode=" + GlobalCode.OPERA_SUCCESS;
+                } else {
+                    sysUserDao.delete((Integer) request.getAttribute("readerDeleteId"));
+                    return "forward:/error.htm?resultCode=" + GlobalCode.OPERA_FAILURE;
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                return "forward:/error.htm?resultCode=95272";
             }
         }
     }

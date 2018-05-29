@@ -233,6 +233,7 @@ public class SysUserController {
         else {
             //TODO 转发到原来的用户添加
             request.setAttribute("readerId",sysUser.getUsername());
+            request.setAttribute("readerDeleteId",sysUser.getUsername());
             request.setAttribute("readerName",sysUser.getRealname());
             request.setAttribute("readerGender",sysUser.getGender());
             request.setAttribute("readerTel",sysUser.getMobile());

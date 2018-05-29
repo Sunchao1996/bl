@@ -58,6 +58,8 @@ public class ReturnCodeUtil {
          */
         //操作失败返回该值，比如新增、修改、删除失败
         hashMap.put("30001", new ReturnMsg("30001", "权限不足！"));
+        hashMap.put("95271", new ReturnMsg("95271", "用户信息重复！"));
+        hashMap.put("95272", new ReturnMsg("95272", "用户信息绑定失败！"));
     }
 
     /**
